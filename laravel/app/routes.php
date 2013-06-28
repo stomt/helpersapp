@@ -13,16 +13,16 @@
 
 Route::group(array('prefix' => 'cities/{city_id}'), function() {
 
-	Route::group(array('prefix' => 'requests/{request_id}'), function() {
+	Route::group(array('prefix' => 'insertions/{request_id}'), function() {
 
 		Route::resource('help', 'HelpController', array('only' => array('store', 'update', 'destroy')));
 
 	});
 
-	Route::resource('requests', 'RequestsController', array('only' => array('index', 'store', 'update', 'destroy')));
+	Route::resource('insertions', 'InsertionsController', array('only' => array('index', 'store', 'update', 'destroy')));
 
 });
 
-Route::resource('cities', 'CitiesController', array('only' => array('index')));
+Route::resource('cities', 'CitiesController', array('only' => array('index', 'store')));
 
 Route::get('/', 'HomeController@index');

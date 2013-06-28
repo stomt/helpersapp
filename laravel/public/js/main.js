@@ -1,5 +1,6 @@
 var city    = null,
-    baseUrl = '//'+document.location.hostname+'/backend/index.php?',
+    // baseUrl = '//'+document.location.hostname+':9000/cities/',
+    baseUrl = '//localhost:9000/cities',
     tc      = 'tap' // tap or click?
     ;
 
@@ -8,11 +9,7 @@ function IsValidAmount(value){if(value.length==0)return false;var intValue=parse
 $(document)
     .bind('pageinit',function(){
 
-        $.ajaxSetup({
-            data: {
-                ajax : 'true'
-            }
-        });
+        $.ajaxSetup();
 
         $('.amountHelper').change(function(){
             alert("test")
@@ -28,7 +25,7 @@ $(document)
             .on( 'pagebeforeshow',function(event){
                 if(city==null){
                     $.ajax({
-                        url: baseUrl+"c=Help&m=getCity",
+                        url: baseUrl,
                         context: this
                     }).done(function(data) {
                             if(data != 'false' && data != ''){
@@ -48,10 +45,11 @@ $(document)
                 city = $(this).val();
                 $('.city').html(city);
                 $.ajax({
-                    url: baseUrl+"c=Help&m=setCity",
+                    type: 'post',
+                    url: baseUrl,
                     context: this,
                     data: {
-                        "city" : city
+                        "city_id" : city
                     }
                 }).success(function(data) {
                         $.mobile.changePage($('#offerHelp'));
@@ -63,7 +61,7 @@ $(document)
             .on( 'pagebeforeshow',function(event){
                 if(city==null){
                     $.ajax({
-                        url: baseUrl+"c=Help&m=getCity",
+                        url: baseUrl,
                         context: this
                     }).done(function(data) {
                             if(data != 'false' && data != ''){
@@ -120,7 +118,7 @@ $(document)
                 e.stopImmediatePropagation();
                 if(city==null){
                     $.ajax({
-                        url: baseUrl+"c=Help&m=getCity",
+                        url: baseUrl,
                         context: this
                     }).done(function(data) {
                             if(data != 'false' && data != ''){
@@ -182,7 +180,7 @@ $(document)
             .on( 'pagebeforeshow',function(event){
                 if(city==null){
                     $.ajax({
-                        url: baseUrl+"c=Help&m=getCity",
+                        url: baseUrl,
                         context: this
                     }).done(function(data) {
                         if(data != 'false' && data != ''){
@@ -195,11 +193,8 @@ $(document)
                 }
 
                 $.ajax({
-                    url: baseUrl+"c=Help&m=getHelpRequests",
-                    context: this,
-                    data: {
-                        city : city
-                    }
+                    url: baseUrl+"/" + city + "/insertions",
+                    context: this
                 }).done(function(d) {
                         $("#helpRequests").html(d).trigger('create');
                     });

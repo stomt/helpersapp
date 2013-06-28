@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserRequestTable extends Migration {
+class CreateUserInsertionTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,12 @@ class CreateUserRequestTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('user_request', function(Blueprint $table)
+		Schema::create('user_insertion', function(Blueprint $table)
 		{
 			$table->increments('id');
 
 			$table->integer('user_id');
-			$table->integer('request_id');
+			$table->integer('insertion_id');
 
 			$table->integer('amount');
 
@@ -32,7 +32,7 @@ class CreateUserRequestTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('user_request');
+		Schema::drop('user_insertion');
 	}
 
 }

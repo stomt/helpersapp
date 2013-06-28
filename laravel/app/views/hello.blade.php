@@ -34,17 +34,12 @@
             <h4>In welcher Stadt?</h4>
             <select class="chooseCity">
                 <option>Bitte Stadt wählen</option>
-                <option><a data-city="Boizenburg">Boizenburg</a></option>
-                <option><a data-city="Deggendorf">Deggendorf</a></option>
-                <option><a data-city="Dresden">Dresden</a></option>
-                <option><a data-city="Dömitz">Dömitz</a></option>
-                <option><a data-city="Gera">Gera</a></option>
-                <option><a data-city="Landshut">Landshut</a></option>
-                <option><a data-city="Fischbeck">Fischbeck</a></option>
-                <option><a data-city="Freising">Freising</a></option>
-                <option><a data-city="Magdeburg">Magdeburg</a></option>
-                <option><a data-city="Passau">Passau</a></option>
-                <option><a data-city="Rosenheim">Rosenheim</a></option>
+
+                @foreach(City::all() as $city)
+
+                    <option value="{{ $city->id }}"><a data-city="{{ $city->id }}">{{ $city->title }}</a></option>
+
+                @endforeach
             </select>
 
             <ul>

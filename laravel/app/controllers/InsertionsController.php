@@ -1,17 +1,17 @@
 <?php
 
-class RequestsController extends BaseController {
+class InsertionsController extends BaseController {
 
     /**
-     * Request Repository
+     * Insertion Repository
      *
-     * @var Request
+     * @var Insertion
      */
-    protected $request;
+    protected $insertion;
 
-    public function __construct(Request $request)
+    public function __construct(Insertion $insertion)
     {
-        $this->request = $request;
+        $this->insertion = $insertion;
     }
 
     /**
@@ -19,9 +19,17 @@ class RequestsController extends BaseController {
      *
      * @return Response
      */
-    public function index()
+    public function index($city_id)
     {
-    	
+        // $city = City::find($city_id);
+        // if ($city) {
+        //     $requests = $city->requests;
+    	   // return View::make('requests.index', compact('requests'));
+        // }
+        // return "false";
+
+        $insertions = Insertion::withTrashed()->get();
+        return View::make('insertions.index', compact('insertions'));
     }
 
     /**

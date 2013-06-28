@@ -17,6 +17,8 @@ class CreateUsersTable extends Migration {
 			$table->increments('id');
 			
 			$table->integer('city_id');
+
+			$table->timestamps();
 		});
 	}
 
