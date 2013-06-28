@@ -3,15 +3,15 @@
 class HelpController extends BaseController {
 
     /**
-     * Help Repository
+     * User Repository
      *
-     * @var Help
+     * @var User
      */
-    protected $help;
+    protected $user;
 
-    public function __construct(Help $help)
+    public function __construct(User $user)
     {
-        $this->help = $help;
+        $this->user = $user;
     }
 
 

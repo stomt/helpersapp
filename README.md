@@ -2,3 +2,26 @@ flut.app
 ========
 
 Koordinationsapp bei Hochwasserkatastrophen
+
+
+## Installation
+
+[offizielle Anleitung](http://laravel.com/docs/installation)
+
+Laravel Depencies installieren
+
+    composer update
+
+local Environment in `/bootstrap/start.php` Zeile 32 einrichten
+
+    // MACHINE-NAME durch name des Entwickungsrechners ersetzen
+    'local-philippzentner' => array('MACHINE-NAME'),
+ 
+Datenbank migrieren
+
+    php artisan migrate --seed
+
+Testserver starten
+
+    php artisan serve
+
