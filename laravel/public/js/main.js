@@ -1,6 +1,5 @@
 var city    = null,
-    // baseUrl = '//'+document.location.hostname+':9000/cities/',
-    baseUrl = '//localhost:9000/cities',
+    baseUrl = '//'+document.location.hostname+':'+location.port+'/cities',
     tc      = 'tap' // tap or click?
     ;
 
