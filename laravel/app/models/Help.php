@@ -1,6 +1,6 @@
 <?php
 
-class Help extends Eloquent {
+class Helper extends Eloquent {
 
     protected $guarded = array();
 

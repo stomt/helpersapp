@@ -12,9 +12,22 @@ class CreateRequestsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('requests', function(Blueprint $table)
+		Schema::create('requests', function(Blueprint $table)
 		{
-			//
+			$table->increments('id');
+            
+            $table->integer('city_id');
+            $table->integer('user_id');
+
+            $table->string('address');
+            $table->integer('helperRequested');
+            // $table->integer('helperConfirmed');
+            $table->text('notice');
+            $table->timestamp('lifetime');
+            $table->timestamp('howlong');
+
+            $table->softDeletes();
+            $table->timestamps();
 		});
 	}
 
@@ -25,10 +38,7 @@ class CreateRequestsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('requests', function(Blueprint $table)
-		{
-			//
-		});
+		Schema::drop('requests');
 	}
 
 }

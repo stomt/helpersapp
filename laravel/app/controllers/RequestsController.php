@@ -31,6 +31,8 @@ class RequestsController extends BaseController {
      */
     public function store()
     {
+        
+    }
 
    	/**
      * Update the specified resource in storage.
