@@ -11,7 +11,18 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::group(array('prefix' => 'cities/{city_id}'), function() {
+
+	Route::group(array('prefix' => 'requests/{request_id}'), function() {
+
+		Route::resource('help', 'HelpController', array('only' => array('store', 'update', 'destroy')));
+
+	});
+
+	Route::resource('requests', 'RequestsController', array('only' => array('index', 'store', 'update', 'destroy')));
+
 });
+
+Route::resource('cities', 'CitiesController', array('only' => array('index')));
+
+Route::get('/', 'HomeController@index');
