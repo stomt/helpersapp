@@ -53,7 +53,7 @@
         </div><!-- /content -->
 
         <div data-role="footer" data-theme="c">
-            <a href="http://philippzentner.de" title="Gründer von stomt">Philipp Zentner</a> <a href="http://maxklenk.de" title="Max Klenk">Max Klenk</a> <a href="http://stomt.com" title="stomt - Feedback">stomt</a> | <small>Version <!-- TODO --></small> | <a href="#impressum">Impressum</a>
+            <a href="http://philippzentner.de" title="Gründer von stomt">Philipp Zentner</a> <a href="http://www.linkedin.com/in/maxklenk" title="Max Klenk">Max Klenk</a> <a href="http://stomt.com" title="stomt - Feedback">stomt</a> | <small>Version <!-- TODO --></small> | <a href="#impressum">Impressum</a>
         </div><!-- /footer -->
 
     </div><!-- /page -->

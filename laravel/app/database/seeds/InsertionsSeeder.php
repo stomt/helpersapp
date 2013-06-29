@@ -15,7 +15,8 @@ class InsertionsSeeder extends Seeder {
                 'user_id' => 1,
                 'address' => 'daheim',
                 'helperRequested' => 10,
-                'notice' => 'bringt Eimer'
+                'notice' => 'bringt Eimer',
+                'howlong' => date('Y-m-d H:i:s',strtotime('2013-06-29 13:00'))
                 )
         );
 

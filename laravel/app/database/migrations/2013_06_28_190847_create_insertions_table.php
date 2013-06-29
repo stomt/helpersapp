@@ -21,7 +21,6 @@ class CreateInsertionsTable extends Migration {
 
             $table->string('address');
             $table->integer('helperRequested');
-            // $table->integer('helperConfirmed');
             $table->text('notice');
             $table->timestamp('howlong');
 

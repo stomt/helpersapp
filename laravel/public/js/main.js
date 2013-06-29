@@ -22,14 +22,13 @@ $(document)
         $.ajaxSetup();
 
         $('.amountHelper').change(function(){
-            alert("test")
             if($("select option:selected").val()>1){
                 $(this).next().html('kommen!')
             }else{
                 $(this).next().html('komme!')
             }
-
         })
+
         // Startpage - check if city already chosen
         $( '#home' )
             .on( 'pagebeforeshow',function(event){
@@ -46,43 +45,47 @@ $(document)
                         });
                 }
             })
-        .on('pageshow',function(){
-            $('.chooseCity')
-            .on('change',function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                city = $(this).val();
-                $('.city').html(city);
-                $.ajax({
-                    type: 'post',
-                    url: baseUrl,
-                    context: this,
-                    data: {
-                        "city_id" : city
-                    }
-                }).success(function(data) {
-                        $.mobile.changePage($('#offerHelp'));
-                    });
+            .on('pageshow',function(){
+                $('.chooseCity')
+                .on('change',function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    city = $(this).val();
+                    $('.city').html(city);
+                    $.ajax({
+                        type: 'post',
+                        url: baseUrl,
+                        context: this,
+                        data: {
+                            "city_id" : city
+                        }
+                    }).success(function(data) {
+                            $.mobile.changePage($('#offerHelp'));
+                        });
+                });
             });
-        });
 
         $('#searchHelp')
+
+            // GET City
             .on( 'pagebeforeshow',function(event){
                 if(city==null){
                     $.ajax({
                         url: baseUrl,
                         context: this
                     }).done(function(data) {
-                            if(data != 'false' && data != ''){
-                                city = data;
-                                $('.city').html(data);
-                            }else{
-                                $.mobile.changePage($('#home'));
-                            }
-                        });
+                        if(data != 'false' && data != ''){
+                            city = data;
+                            $('.city').html(data);
+                        }else{
+                            $.mobile.changePage($('#home'));
+                        }
+                    });
                 }
             })
+
+            // POST Insertion
             .on('pageshow',function(){
                 $('#createHelpRequest').on(tc,function(e){
                     e.preventDefault();
@@ -90,7 +93,7 @@ $(document)
                     e.stopImmediatePropagation();
 
                     if(IsValidAmount($('#helperRequested').val()) == false){
-                        alert("Bitte gib eine Zahl ein!")
+                        alert("Bitte gib eine Zahl ein!");
                         return false;
                     }
                     if($('#amountHelper').val()=='' || $('#address').val()=='' ){
@@ -107,23 +110,23 @@ $(document)
                             data: $(this).parent().serialize()
                         }).done(function(data) {
 
-                                if(run == false) {
-                                    run = true;
-                                    if(data=='0'){
-                                        alert("Ein Fehler ist aufgetreten");
-                                    }else if(data!='1'){
-                                        alert(data);
-                                    }else{
-                                        $.mobile.changePage($('#offerHelp'));
-                                    }
+                            if(run == false) {
+                                run = true;
+                                if(data.success){
+                                    $.mobile.changePage($('#offerHelp'));
+                                } else {
+                                    alert("Ein Fehler ist aufgetreten");
                                 }
-                            });
+                            }
+                        });
                     }
                 })
 
             });
 
         $('#helpdata')
+
+            // GET City 2 (löschen?)
             .on( 'pagebeforeshow',function(e){
                 e.preventDefault();
                 e.stopPropagation();
@@ -133,14 +136,14 @@ $(document)
                         url: baseUrl,
                         context: this
                     }).done(function(data) {
-                            if(data != 'false' && data != ''){
-                                city = data;
-                                $('.city').html(data);
+                        if(data != 'false' && data != ''){
+                            city = data;
+                            $('.city').html(data);
 
-                            }else{
-                                $.mobile.changePage($('#home'));
-                            }
-                        });
+                        }else{
+                            $.mobile.changePage($('#home'));
+                        }
+                    });
                 }
 
                 $.ajax({
@@ -148,7 +151,9 @@ $(document)
                     context: this
                 })
                     .done(function(d) {$("#helpDataReq").html(d).trigger('create');});
-            }) .on('pageshow',function(){
+            }) 
+
+            .on('pageshow',function(){
                 $(this)
                     .on(tc,'.help',function(e){
                         $(this).parent().css('display','none')
@@ -172,17 +177,15 @@ $(document)
                         e.stopImmediatePropagation();
 
                         $.ajax({
-                            url: baseUrl+"c=Help&m=deleteHelpRequest",
+                            type: 'delete',
+                            url: baseUrl+"/"+city+"/insertions/"+$(this).data('iid'),
                             context: this,
-                            data: {
-                                'iid' : $(this).data('iid')
-                            },
                             dataType: 'json'
                         }).success(function(data) {
-                                if(data=="false"){
-                                    alert("Fehler beim Löschen der Hilfe-Anfrage.")
+                                if(data.success){
+                                    $("#helpRequests").html(data.html).trigger('create');
                                 }else{
-                                    $(this).parent().css('display','none')
+                                    alert("Fehler beim Löschen der Hilfe-Anfrage.")
                                 }
                             })
                     })
@@ -207,9 +210,13 @@ $(document)
                 $.ajax({
                     url: baseUrl+"/" + city + "/insertions",
                     context: this
-                }).done(function(d) {
-                        $("#helpRequests").html(d).trigger('create');
-                    });
+                }).done(function(data) {
+                    if (data.success) {
+                        $("#helpRequests").html(data.html).trigger('create');
+                    } else {
+                        alert('ERROR: TODO')
+                    }
+                });
 
                 // Get data
 
@@ -222,18 +229,16 @@ $(document)
                         e.stopImmediatePropagation();
 
                         $.ajax({
-                            url: baseUrl+"c=Help&m=deleteHelpRequest",
+                            type: 'delete',
+                            url: baseUrl+"/"+city+"/insertions/"+$(this).data('iid'),
                             context: this,
-                            data: {
-                                'iid' : $(this).data('iid')
-                            },
                             dataType: 'json'
                         })
                             .success(function(data) {
                                 if(data=="false"){
                                     alert("Fehler beim Löschen der Hilfe-Anfrage.")
                                 }else{
-                                    $(this).parent().css('display','none')
+                                    $("#helpRequests").html(data.html).trigger('create');
                                 }
                             })
                     })
@@ -248,19 +253,25 @@ $(document)
                         e.preventDefault()
                         e.stopPropagation()
                         e.stopImmediatePropagation();
-
+                        
+                        var amount = 1;
+                        if (m == 'increaseHelp') {
+                            amount = 1;
+                        } else {
+                            amount = -1;
+                        }
                         $.ajax({
                             type: "post",
                             url: baseUrl+"/"+city+"/insertions/"+$(this).data('iid')+"/help",
                             context: this,
                             data: {
-                                'amount' : $(this).data('amountHelper')
+                                "amount" : amount //$(this).data('amountHelper')
                             },
                             dataType: 'json'
                         })
                             .success(function(data) {
-                                if(data.success=='true' && run == false){
-                                    $("#helpRequests").html(data.reqs).trigger('create');
+                                if (data.success == true && run == false){
+                                    $("#helpRequests").html(data.html).trigger('create');
                                     run = true;
                                 }
 
