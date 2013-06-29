@@ -25,4 +25,6 @@ Route::group(array('prefix' => 'cities/{city_id}'), function() {
 
 Route::resource('cities', 'CitiesController', array('only' => array('index', 'store')));
 
+
+Route::get('cities/myhelp', 'InsertionsController@myhelp');
 Route::get('/', 'HomeController@index');

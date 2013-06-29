@@ -1,4 +1,5 @@
 var city    = null,
+    cities  = null,
     baseUrl = '//'+document.location.hostname+':'+location.port+'/cities',
     tc      = 'tap' // tap or click?
     ;
@@ -22,13 +23,16 @@ $(document)
         $.ajaxSetup();
 
         function setHeader(city) {
-            $('.city').html(city);
+            if (cities && city) {
+                $('.city').html(cities[city]);
+            } else {
+                $('.city').html("Übersicht");
+            }
         }
 
         function setContent(content) {
             $("#helpRequests").html(content).trigger('create');
         }
-
 
 
         // Startpage
@@ -43,7 +47,8 @@ $(document)
                     }).success(function(data) {
                         if (data.success) {
                             city = data.city_id;
-                            setHeader(city + ' lastSession');
+                            cities = data.cities;
+                            setHeader(city);
                             $.mobile.changePage($('#offerHelp'));
                         }
                     });
@@ -59,7 +64,7 @@ $(document)
                         e.stopImmediatePropagation();
 
                         city = $(this).val();
-                        setHeader(city + ' selected');
+                        setHeader(city);
                         $.ajax({
                             type: 'post',
                             url: baseUrl,
@@ -88,11 +93,13 @@ $(document)
                     }).success(function(data) {
                         if (data.success) {
                             city = data.city_id;
-                            setHeader(city + ' active');
+                            setHeader(city);
                         } else {
                             $.mobile.changePage($('#home'));
                         }
                     });
+                } else {
+                    setHeader(city);
                 }
             })
 
@@ -114,7 +121,7 @@ $(document)
                     }
 
                     // var recieved = false;
-                    // var started = false; // WARUM?
+                    // var started = false; 
                     // if(started == false){
                     //     started = true;
                         $.ajax({
@@ -137,53 +144,76 @@ $(document)
             });
 
 
-        // My Page (not yet implemented)
+        // My Page
         $('#helpdata')
 
-            // GET City 2 (löschen?)
-            .on( 'pagebeforeshow',function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                if(city==null){
-                    $.ajax({
-                        url: baseUrl,
-                        context: this
-                    }).done(function(data) {
-                        if(data != 'false' && data != ''){
-                            city = data;
-                            $('.city').html(data);
-                        }else{
-                            $.mobile.changePage($('#home'));
-                        }
-                    });
-                }
+            // GET City
+            .on('pagebeforeshow',function(event){
+                $('.city').html("Übersicht");
+
 
                 $.ajax({
-                    url: baseUrl+"c=Help&m=getMyHelpRequests",
+                    url: baseUrl+"/myhelp",
                     context: this
-                })
-                    .done(function(d) {$("#helpDataReq").html(d).trigger('create');});
-            }) 
+                }).success(function(data) {
+                    if (data.success) {
+                        $("#helpDataReq").html(data.html).trigger('create');
+                    }
+                });
+            })
+
+   
 
             .on('pageshow',function(){
                 $(this)
+                    // JOIN/LEAVE Insertion
                     .on(tc,'.help',function(e){
-                        $(this).parent().css('display','none')
-                        var run = false;
-                        e.preventDefault();
-                        e.stopPropagation();
+                        e.preventDefault()
+                        e.stopPropagation()
                         e.stopImmediatePropagation();
 
+                        // set loadingstate
+                        $(this)
+                            .html('<span class="ui-btn-inner"><span class="ui-btn-text">Bitte warten...</span></span>')
+                            .removeAttr('data-role');
+                        
+                        var amount = $(this).data('amount');
+                        
                         $.ajax({
-                            url: baseUrl+"c=Help&m=decreaseHelp",
+                            type: "post",
+                            url: baseUrl+"/"+city+"/insertions/"+$(this).data('iid')+"/help",
                             context: this,
                             data: {
-                                'iid' : $(this).data('iid')
+                                "amount" : amount 
                             },
                             dataType: 'json'
+                        }).success(function(data) {
+                            if (data.success) {
+                                $("#helpDataReq").html(data.html).trigger('create');
+                            }
                         });
                     })
+
+
+                    // STORE amountHelper in submitbutton
+                    .on('change','.amountHelper',function(e){
+                        e.preventDefault()
+                        e.stopPropagation()
+                        e.stopImmediatePropagation();
+
+                        var amount = parseInt($('select.amountHelper option:selected').val());
+                        var button = $(this).parent().parent().parent().find('.help');
+                        
+                        if (button.data('help') == 'increaseHelp') {
+                            button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'kommen!' : 'komme!') + '</span></span>')
+                                .data('amount', amount);
+                        } else {
+                            button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'wieder absagen!' : 'sage ab!') + '</span></span>')
+                                .data('amount', -amount);
+                        }
+                    })
+
+                    // DELETE Insertion
                     .on(tc,'.delete',function(e){
                         e.preventDefault();
                         e.stopPropagation();
@@ -195,12 +225,12 @@ $(document)
                             context: this,
                             dataType: 'json'
                         }).success(function(data) {
-                                if(data.success){
-                                    $("#helpRequests").html(data.html).trigger('create');
-                                }else{
-                                    alert("Fehler beim Löschen der Hilfe-Anfrage.")
-                                }
-                            })
+                            if (data.success) {
+                                $("#helpDataReq").html(data.html).trigger('create');
+                            } else {
+                                alert("Fehler beim Löschen der Hilfe-Anfrage.")
+                            }
+                        });
                     })
             });
 
@@ -210,7 +240,7 @@ $(document)
 
             // GET Insertions (and GET City) 
             .on( 'pagebeforeshow',function(event){
-                if (city == null){
+                if (city == null) {
 
                     // request city_id first
                     $.ajax({
@@ -219,7 +249,8 @@ $(document)
                     }).success(function(data) {
                         if (data.success) {
                             city = data.city_id;
-                            setHeader(city + ' active');
+                            cities = data.cities;
+                            setHeader(city);
 
                             // load content after recieving city_id
                             $.ajax({
@@ -238,7 +269,7 @@ $(document)
                     });
 
                 } else {
-
+                    setHeader(city);
                     // load content imidiatly
                     $.ajax({
                         url: baseUrl+"/" + city + "/insertions",
@@ -323,6 +354,6 @@ $(document)
                                 .data('amount', -amount);
                         }
                     })
-
             });
+    
     });

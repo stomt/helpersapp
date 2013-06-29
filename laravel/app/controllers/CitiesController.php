@@ -26,6 +26,11 @@ class CitiesController extends BaseController {
         if (User::live()->city_id) {
             $result["success"] = true;
             $result["city_id"] = User::live()->city_id;
+            $cities;
+            foreach (City::all() as $city) {
+                $cities[$city->id] = $city->title;
+            }
+            $result["cities"] = $cities;
         }
 
     	return Response::json($result);
@@ -43,7 +48,9 @@ class CitiesController extends BaseController {
         if (Input::has('city_id')) {
             $city = City::find(Input::get('city_id'));
             if ($city) {
-                User::live()->city_id = $city->id;
+                $user = User::live();
+                $user->city_id = $city->id;
+                $user->save();
                 $result["success"] = true;
                 $result["city_id"] = $city->id;
             }
