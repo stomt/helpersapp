@@ -27,7 +27,7 @@
                         </option>
                     @endfor
                 </select>
-                <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="decreaseHelp" data-theme="e" data-iid="{{ $insertion->id }}">wieder absagen!</div>
+                <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="decreaseHelp" data-amount="{{ -$insertion->helpOffered }}" data-theme="e" data-iid="{{ $insertion->id }}">wieder absagen!</div>
 
             @else
 
@@ -38,7 +38,7 @@
                         </option>
                     @endfor
                 </select>
-                <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="increaseHelp" data-iid="{{ $insertion->id }}">komme!</div>
+                <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="increaseHelp" data-amount="1" data-iid="{{ $insertion->id }}">komme!</div>
 
             @endif
 

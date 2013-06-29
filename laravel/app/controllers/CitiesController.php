@@ -21,13 +21,19 @@ class CitiesController extends BaseController {
      */
     public function index()
     {
-        if (Session::has('user_id')) {
-            $user = User::find(Session::get('user_id'));
-            if ($user && $user->hasCity()) {
-                return $user->city_id;
+        $result["success"] = false;
+
+        if (User::live()->city_id) {
+            $result["success"] = true;
+            $result["city_id"] = User::live()->city_id;
+            $cities;
+            foreach (City::all() as $city) {
+                $cities[$city->id] = $city->title;
             }
+            $result["cities"] = $cities;
         }
-    	return "false";
+
+    	return Response::json($result);
     }
 
     /**
@@ -37,20 +43,20 @@ class CitiesController extends BaseController {
      */
     public function store()
     {
+        $result["success"] = false;
+
         if (Input::has('city_id')) {
             $city = City::find(Input::get('city_id'));
             if ($city) {
-                
-                if(Session::has('user_id'))
-                    $user = User::find(Session::get('user_id'));
-                if(!$user)
-                    $user = new User();
+                $user = User::live();
                 $user->city_id = $city->id;
                 $user->save();
-                Session::put('user_id', $user->id);
+                $result["success"] = true;
+                $result["city_id"] = $city->id;
             }
-
         }
+        
+        return Response::json($result);
     }
 
 }

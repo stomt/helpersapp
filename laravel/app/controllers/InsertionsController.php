@@ -111,6 +111,26 @@ class InsertionsController extends BaseController {
         return Response::json($result);
     }
 
+    public function myhelp()
+    {
+        $result["success"] = false;
+
+        $user = User::live();
+        $insertions = Insertion::with('users')->get()->filter(function($insertion) use ($user)
+        {
+            if ($insertion->user_id == $user->id) {
+                return $insertion;
+            } elseif ($insertion->users()->where('user_id', $user->id)->first()) {
+                return $insertion;
+            }
+        });
+
+        $result["success"] = true;
+        $result["html"] = static::renderInsertions($insertions);
+        
+        return Response::json($result);
+    }
+
     /**
      * Helper function to render a listing of $insertions.
      *
@@ -214,7 +234,7 @@ class InsertionsController extends BaseController {
          */
         private static function helpOffered($insertion)
         {
-            $user = $insertion->users()->where('user_id', Session::get('user_id'))->first();
+            $user = $insertion->users()->where('user_id', User::live()->id)->first();
             if ($user) {
                 return $user->pivot->amount;
             } else {

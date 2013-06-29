@@ -15,7 +15,7 @@ Route::group(array('prefix' => 'cities/{city_id}'), function() {
 
 	Route::group(array('prefix' => 'insertions/{request_id}'), function() {
 
-		Route::resource('help', 'HelpController', array('only' => array('store', 'update', 'destroy')));
+		Route::resource('help', 'HelpController', array('only' => array('store')));
 
 	});
 
@@ -25,4 +25,6 @@ Route::group(array('prefix' => 'cities/{city_id}'), function() {
 
 Route::resource('cities', 'CitiesController', array('only' => array('index', 'store')));
 
+
+Route::get('cities/myhelp', 'InsertionsController@myhelp');
 Route::get('/', 'HomeController@index');
