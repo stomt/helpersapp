@@ -22,14 +22,13 @@ $(document)
         $.ajaxSetup();
 
         $('.amountHelper').change(function(){
-            alert("test")
             if($("select option:selected").val()>1){
                 $(this).next().html('kommen!')
             }else{
                 $(this).next().html('komme!')
             }
-
         })
+
         // Startpage - check if city already chosen
         $( '#home' )
             .on( 'pagebeforeshow',function(event){
@@ -46,26 +45,26 @@ $(document)
                         });
                 }
             })
-        .on('pageshow',function(){
-            $('.chooseCity')
-            .on('change',function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                city = $(this).val();
-                $('.city').html(city);
-                $.ajax({
-                    type: 'post',
-                    url: baseUrl,
-                    context: this,
-                    data: {
-                        "city_id" : city
-                    }
-                }).success(function(data) {
-                        $.mobile.changePage($('#offerHelp'));
-                    });
+            .on('pageshow',function(){
+                $('.chooseCity')
+                .on('change',function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    city = $(this).val();
+                    $('.city').html(city);
+                    $.ajax({
+                        type: 'post',
+                        url: baseUrl,
+                        context: this,
+                        data: {
+                            "city_id" : city
+                        }
+                    }).success(function(data) {
+                            $.mobile.changePage($('#offerHelp'));
+                        });
+                });
             });
-        });
 
         $('#searchHelp')
             .on( 'pagebeforeshow',function(event){
@@ -248,19 +247,25 @@ $(document)
                         e.preventDefault()
                         e.stopPropagation()
                         e.stopImmediatePropagation();
-
+                        
+                        var amount = 1;
+                        if (m == 'increaseHelp') {
+                            amount = 1;
+                        } else {
+                            amount = -1;
+                        }
                         $.ajax({
                             type: "post",
                             url: baseUrl+"/"+city+"/insertions/"+$(this).data('iid')+"/help",
                             context: this,
                             data: {
-                                'amount' : $(this).data('amountHelper')
+                                "amount" : amount //$(this).data('amountHelper')
                             },
                             dataType: 'json'
                         })
                             .success(function(data) {
-                                if(data.success=='true' && run == false){
-                                    $("#helpRequests").html(data.reqs).trigger('create');
+                                if (data.success == true && run == false){
+                                    $("#helpRequests").html(data.html).trigger('create');
                                     run = true;
                                 }
 

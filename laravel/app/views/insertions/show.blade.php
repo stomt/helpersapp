@@ -39,7 +39,7 @@
                     @endfor
                 </select>
                 <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="increaseHelp" data-iid="{{ $insertion->id }}">komme!</div>
-                
+
             @endif
 
         </div>

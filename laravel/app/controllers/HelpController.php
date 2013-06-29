@@ -24,20 +24,48 @@ class HelpController extends BaseController {
     {
         $city = City::find($city_id);
         $insertion = Insertion::find($insertion_id);
+        $success = false;
+
         if ($city && $insertion) {
-            $insertion->users()->attach(Session::get('user_id'), array('amount' => Input::get('amount')));
-            
+            $user = $insertion->user(Session::get('user_id'));
+            $amount = Input::get('amount');
+
+            // new entry
+            if (!$user && $amount > 0) {
+                $insertion->users()->attach(Session::get('user_id'), array('amount' => Input::get('amount')));
+                $success = true;
+                
+
+            // edit entry
+            } elseif ($user && $amount < 0) {
+                $newAmount = $user->pivot->amount + $amount;
+                
+                // all removed
+                if ($newAmount <= 0) {
+                    $insertion->users()->detach($user->id);
+                
+                // just decreased
+                } else {
+                    $user->pivot->amount = $newAmount;
+                    $user->pivot->save();
+                }
+                $success = true;
+            }
+        }
+
+        if ($success) {
             $insertions = $city->insertions;
             InsertionsController::enrichData($insertions);
             $result = array(
                 "success" => true,
-                "amount" => $insertion->helperRequested - $insertion->users()->sum('amount'),
-                "reqs" => View::make('insertions.index', compact('insertions'))->render()
-                );
-            return json_encode($result);
+                "html" => View::make('insertions.index', compact('insertions'))->render()
+            );
+        } else {
+            $result = array(
+                "success" => false
+            );
         }
-
-        $result = array("success" => false);
+        
         return json_encode($result);
     }
 

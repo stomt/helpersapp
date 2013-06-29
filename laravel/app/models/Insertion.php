@@ -24,6 +24,11 @@ class Insertion extends Eloquent {
     				->withPivot('amount');
     }
 
+    public function user($user_id)
+    {
+    	return $this->users()->where('user_id', $user_id)->first();
+    }
+
     public function creator()
     {
     	return $this->hasOne('User', 'user_id');

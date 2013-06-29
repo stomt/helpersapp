@@ -170,7 +170,7 @@ class InsertionsController extends BaseController {
     {
         $user = $insertion->users()->where('user_id', Session::get('user_id'))->first();
         if ($user) {
-            return $user->amount;
+            return $user->pivot->amount;
         } else {
             return 0;
         }
