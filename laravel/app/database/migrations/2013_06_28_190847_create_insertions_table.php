@@ -23,7 +23,6 @@ class CreateInsertionsTable extends Migration {
             $table->integer('helperRequested');
             // $table->integer('helperConfirmed');
             $table->text('notice');
-            $table->timestamp('lifetime');
             $table->timestamp('howlong');
 
             $table->softDeletes();

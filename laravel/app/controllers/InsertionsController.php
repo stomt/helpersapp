@@ -21,15 +21,12 @@ class InsertionsController extends BaseController {
      */
     public function index($city_id)
     {
-        // $city = City::find($city_id);
-        // if ($city) {
-        //     $requests = $city->requests;
-    	   // return View::make('requests.index', compact('requests'));
-        // }
-        // return "false";
-
-        $insertions = Insertion::withTrashed()->get();
-        return View::make('insertions.index', compact('insertions'));
+        $city = City::find($city_id);
+        if ($city) {
+            $insertions = $city->insertions;
+    	    return View::make('insertions.index', compact('insertions'));
+        }
+        return "false";
     }
 
     /**
@@ -37,9 +34,27 @@ class InsertionsController extends BaseController {
      *
      * @return Response
      */
-    public function store()
+    public function store($city_id)
     {
-        
+        $city = City::find($city_id);
+        if ($city) {
+            $input = Input::only('address', 'helperRequested', 'notice', 'date', 'time');
+            $validation = Validator::make($input, Insertion::$rules);
+            if ($validation->passes()) {
+                $insertion = new Insertion();
+                $insertion->user_id = Session::get('user_id');
+                $insertion->city_id = $city->id;
+                
+                $insertion->address = $input['address'];
+                $insertion->notice = $input['notice'];
+                $insertion->howlong = date('Y-m-d H:i:s',strtotime($input['date'].' '.$input['time']));
+                
+                $insertion->save();
+
+                return 1;
+            }
+        }
+        return "false";
     }
 
    	/**

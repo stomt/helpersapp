@@ -3,7 +3,18 @@ var city    = null,
     tc      = 'tap' // tap or click?
     ;
 
-function IsValidAmount(value){if(value.length==0)return false;var intValue=parseInt(value);if(intValue==Number.NaN)return false;if(intValue<=0)return false;return true;}
+function IsValidAmount(value){
+    if(value.length==0)
+        return false;
+
+    var intValue=parseInt(value);
+    if(intValue==Number.NaN)
+        return false;
+
+    if(intValue<=0)
+        return false;
+    return true;
+}
 
 $(document)
     .bind('pageinit',function(){
@@ -78,7 +89,7 @@ $(document)
                     e.stopPropagation();
                     e.stopImmediatePropagation();
 
-                    if(IsValidAmount($('#amountHelper').val()) == false){
+                    if(IsValidAmount($('#helperRequested').val()) == false){
                         alert("Bitte gib eine Zahl ein!")
                         return false;
                     }
@@ -90,8 +101,10 @@ $(document)
                     if(run2==false){
                         run2=true;
                         $.ajax({
-                            url: baseUrl+"c=Help&m=addHelpRequest&"+$(this).parent().serialize(),
-                            context: this
+                            type: "post",
+                            url: baseUrl+"/"+city+"/insertions",
+                            context: this,
+                            data: $(this).parent().serialize()
                         }).done(function(data) {
 
                                 if(run == false) {
@@ -237,12 +250,11 @@ $(document)
                         e.stopImmediatePropagation();
 
                         $.ajax({
-                            url: baseUrl+"c=Help&m="+m,
+                            type: "post",
+                            url: baseUrl+"/"+city+"/insertions/"+$(this).data('iid')+"/help",
                             context: this,
                             data: {
-                                'iid' : $(this).data('iid'),
-                                'frontend' : 'true',
-                                'amountHelper' : $(this).data('amountHelper')
+                                'amount' : $(this).data('amountHelper')
                             },
                             dataType: 'json'
                         })

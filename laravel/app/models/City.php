@@ -6,9 +6,9 @@ class City extends Eloquent {
 
     public static $rules = array();
 
-    public function requests()
+    public function insertions()
     {
-    	$this->hasMany('Insertion');
+    	return $this->hasMany('Insertion');
     }
 
 }

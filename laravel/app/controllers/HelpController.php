@@ -20,9 +20,22 @@ class HelpController extends BaseController {
      *
      * @return Response
      */
-    public function store()
+    public function store($city_id, $insertion_id)
     {
+        $city = City::find($city_id);
+        $insertion = Insertion::find($insertion_id);
+        if ($city && $insertion) {
+            $insertions = $city->insertions;
+            $result = array(
+                "success" => "true",
+                "amount" => "8",
+                "reqs" => View::make('insertions.index', compact('insertions'))->render()
+                );
+            return json_encode($result);
+        }
 
+        $result = array("success" => false);
+        return json_encode($result);
     }
 
    	/**

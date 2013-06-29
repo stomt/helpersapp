@@ -132,20 +132,22 @@
 
         <form id="helpRequest" name="helpRequest">
             <h3>Nach sofortiger Hilfe fragen</h3>
-            <label for="basic">Adresse:</label>
+            <label for="address">Adresse:</label>
             <input type="text" name="address" id="address" data-mini="true" />
 
-            <label for="basic">Anzahl Helfer benötigt:</label>
-            <div style="width:75px"><input type="text" data-inline="true" name="amountHelper" maxlength="3" id="amountHelper" data-mini="true" placeholder="(Zahl)" /></div>
+            <label for="helperRequested">Anzahl Helfer benötigt:</label>
+            <div style="width:75px">
+                <input type="text" data-inline="true" name="helperRequested" maxlength="3" id="helperRequested" data-mini="true" placeholder="(Zahl)" />
+            </div>
 
-            <label for="basic">Ab wann? (Datum / Zeit)</label>
+            <label for="Datum">Ab wann? (Datum / Zeit)</label>
             <div class="datetime">
-                   <div><input type="date" name="Datum" value="<?php echo date('d.m.Y'); ?>"  /></div>
-                   <div><input type="time" name="Zeit" value="<?php echo date('H:i'); ?>"  /></div>
+                   <div><input type="date" name="date" value="<?php echo date('d.m.Y'); ?>"  /></div>
+                   <div><input type="time" name="time" value="<?php echo date('H:i'); ?>"  /></div>
             </div>
             <div style="clear: both"></div>
 
-            <label for="basic">Bemerkung (optional, max. 120 Zeichen):</label>
+            <label for="notice">Bemerkung (optional, max. 120 Zeichen):</label>
             <input type="text" name="notice" id="notice" maxlength="120" data-mini="true" />
 
             <span data-role="button" id="createHelpRequest" data-mini="true">Eintragen</span>
