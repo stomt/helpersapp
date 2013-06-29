@@ -14,7 +14,7 @@
         {{ $insertion->notice }}
     </div>
     @if ($insertion->user_id == Session::get('user_id'))
-        <span data-mini="true" data-role="button" data-theme="e" class="delete" data-iid="{{ $insertion->id }}'">Löschen</span></li>
+        <span data-mini="true" data-role="button" data-theme="e" class="delete" data-iid="{{ $insertion->id }}">Löschen</span></li>
     @else
         <div data-role="controlgroup" data-type="horizontal">
             

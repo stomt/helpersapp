@@ -47,6 +47,7 @@ class InsertionsController extends BaseController {
                 $insertion->city_id = $city->id;
                 
                 $insertion->address = $input['address'];
+                $insertion->helperRequested = $input['helperRequested'];
                 $insertion->notice = $input['notice'];
                 $insertion->howlong = date('Y-m-d H:i:s',strtotime($input['date'].' '.$input['time']));
                 
@@ -64,9 +65,9 @@ class InsertionsController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($city_id, $insertion_id)
     {
-
+        return 'TODO: update';
     }
 
 	/**
@@ -75,9 +76,25 @@ class InsertionsController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($city_id, $insertion_id)
     {
+        $insertion = Insertion::find($insertion_id);
+        $result = array("success" => false);
+        if ($insertion) {
+            if (Session::get('user_id') == $insertion->user_id) {
+                $insertion->delete();
+                $result = array(
+                    "success" => true,
+                    "html" => $this->index($city_id)->render() 
+                );
+            } else {
+                $result["error"] = "No Access";
+            }
+        } else {
+            $result["error"] = "Not Found";
+        }
 
+        return json_encode($result);
     }
 
     /**

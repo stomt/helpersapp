@@ -171,17 +171,15 @@ $(document)
                         e.stopImmediatePropagation();
 
                         $.ajax({
-                            url: baseUrl+"c=Help&m=deleteHelpRequest",
+                            type: 'delete',
+                            url: baseUrl+"/"+city+"/insertions/"+$(this).data('iid'),
                             context: this,
-                            data: {
-                                'iid' : $(this).data('iid')
-                            },
                             dataType: 'json'
                         }).success(function(data) {
-                                if(data=="false"){
-                                    alert("Fehler beim Löschen der Hilfe-Anfrage.")
+                                if(data.success){
+                                    $("#helpRequests").html(data.html).trigger('create');
                                 }else{
-                                    $(this).parent().css('display','none')
+                                    alert("Fehler beim Löschen der Hilfe-Anfrage.")
                                 }
                             })
                     })
@@ -221,18 +219,16 @@ $(document)
                         e.stopImmediatePropagation();
 
                         $.ajax({
-                            url: baseUrl+"c=Help&m=deleteHelpRequest",
+                            type: 'delete',
+                            url: baseUrl+"/"+city+"/insertions/"+$(this).data('iid'),
                             context: this,
-                            data: {
-                                'iid' : $(this).data('iid')
-                            },
                             dataType: 'json'
                         })
                             .success(function(data) {
                                 if(data=="false"){
                                     alert("Fehler beim Löschen der Hilfe-Anfrage.")
                                 }else{
-                                    $(this).parent().css('display','none')
+                                    $("#helpRequests").html(data.html).trigger('create');
                                 }
                             })
                     })
