@@ -37,12 +37,12 @@ $(document)
                         url: baseUrl,
                         context: this
                     }).done(function(data) {
-                            if(data != 'false' && data != ''){
-                                city = data;
-                                $('.city').html(data);
-                                $.mobile.changePage($('#offerHelp'));
-                            }
-                        });
+                        if (data.success) {
+                            city = data.city_id;
+                            $('.city').html(city + ' NAME');
+                            $.mobile.changePage($('#offerHelp'));
+                        }
+                    });
                 }
             })
             .on('pageshow',function(){
@@ -139,7 +139,6 @@ $(document)
                         if(data != 'false' && data != ''){
                             city = data;
                             $('.city').html(data);
-
                         }else{
                             $.mobile.changePage($('#home'));
                         }
