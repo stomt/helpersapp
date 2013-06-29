@@ -24,7 +24,7 @@ h4{text-align:center;margin-left:auto;margin-right:auto;}
 .datetime :first-child{float:left}
 .datetime :last-child{float:right}
 .help{float:left;margin-top:0px;}
-.amountHelpers{float:left}
+.helperRequested{float:left}
 [data-role="footer"]{
     text-align:center;
 }

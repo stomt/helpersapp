@@ -18,6 +18,6 @@
             <option value="1">Ich</option>
             <option value="2">2</option>
         </select>
-        <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="increaseHelp" data-iid="182">komme!</div>
+        <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="increaseHelp" data-iid="{{ $insertion->id }}">komme!</div>
     </div>
 </li>
