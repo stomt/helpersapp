@@ -1,7 +1,7 @@
 
 <li {{ $insertion->helpOffered > 0 ? 'data-theme="e"' : '' }}>
     <h6>
-        <span class="a">{{ $insertion->users()->sum('amount') }} / {{ $insertion->helperRequested }}</span> Helfer/Innen zugesagt
+        <span class="a">{{ $insertion->users()->sum('amount') ? $insertion->users()->sum('amount') : 0 }} / {{ $insertion->helperRequested }}</span> Helfer/Innen zugesagt
     </h6>
     <div class="address">
         Adresse: {{ $insertion->address }} <a href="https://maps.google.com/?q={{ $insertion->address }}">(Google Maps)</a>
