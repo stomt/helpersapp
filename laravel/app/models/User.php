@@ -10,11 +10,6 @@ class User extends Eloquent {
 	 */
 	protected $table = 'users';
 
-	public function hasCity()
-	{
-		return $this->city_id != '';
-	}
-
 	public static function live()
 	{	
 		$user = null;
@@ -31,4 +26,10 @@ class User extends Eloquent {
 
 		return $user;
 	}
+
+	public function hasCity()
+	{
+		return $this->city_id != '';
+	}
+	
 }

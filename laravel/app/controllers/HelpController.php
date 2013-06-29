@@ -3,91 +3,64 @@
 class HelpController extends BaseController {
 
     /**
-     * User Repository
-     *
-     * @var User
-     */
-    protected $user;
-
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
+     * Handel a submitted help offer.
      *
      * @return Response
      */
     public function store($city_id, $insertion_id)
     {
+        $result["success"] = false;
+
         $city = City::find($city_id);
         $insertion = Insertion::find($insertion_id);
-        $success = false;
-
         if ($city && $insertion) {
-            $user = $insertion->user(Session::get('user_id'));
+
+            $user = $insertion->user(User::live()->id);
             $amount = Input::get('amount');
 
-            // new entry
+            // store new entry
             if (!$user && $amount > 0) {
-                $insertion->users()->attach(Session::get('user_id'), array('amount' => Input::get('amount')));
-                $success = true;
-                
+                $this->storeHelp($insertion, $amount);
+                $result["success"] = true;  
 
-            // edit entry
             } elseif ($user && $amount < 0) {
                 $newAmount = $user->pivot->amount + $amount;
                 
-                // all removed
+                // destroy entry
                 if ($newAmount <= 0) {
-                    $insertion->users()->detach($user->id);
+                    $this->destroyHelp($insertion);
                 
-                // just decreased
+                // update entry
                 } else {
-                    $user->pivot->amount = $newAmount;
-                    $user->pivot->save();
+                    $this->updateHelp($user, $newAmount);
                 }
-                $success = true;
+
+                $result["success"] = true; 
             }
         }
 
-        if ($success) {
+        if ($result["success"]) {
             $insertions = $city->insertions;
-            InsertionsController::enrichData($insertions);
-            $result = array(
-                "success" => true,
-                "html" => View::make('insertions.index', compact('insertions'))->render()
-            );
-        } else {
-            $result = array(
-                "success" => false
-            );
+            $result["html"] = InsertionsController::renderInsertions($insertions);
         }
         
-        return json_encode($result);
+        return Response::json($result);
     }
 
-   	/**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
+    private function storeHelp($insertion, $amount)
     {
-
+        $insertion->users()
+                  ->attach(User::live()->id, array('amount' => $amount));
     }
 
-	/**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
+    private function updateHelp($user, $amount) 
     {
+        $user->pivot->amount = $amount;
+        $user->pivot->save();
+    }
 
+    private function destroyHelp($insertion)
+    {
+        $insertion->users()->detach(User::live()->id);
     }
 }
