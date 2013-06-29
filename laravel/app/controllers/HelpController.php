@@ -25,10 +25,13 @@ class HelpController extends BaseController {
         $city = City::find($city_id);
         $insertion = Insertion::find($insertion_id);
         if ($city && $insertion) {
+            $insertion->users()->attach(Session::get('user_id'), array('amount' => Input::get('amount')));
+            
             $insertions = $city->insertions;
+            InsertionsController::enrichData($insertions);
             $result = array(
-                "success" => "true",
-                "amount" => "8",
+                "success" => true,
+                "amount" => $insertion->helperRequested - $insertion->users()->sum('amount'),
                 "reqs" => View::make('insertions.index', compact('insertions'))->render()
                 );
             return json_encode($result);

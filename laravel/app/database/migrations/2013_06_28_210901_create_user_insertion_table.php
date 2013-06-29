@@ -12,7 +12,7 @@ class CreateUserInsertionTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('user_insertion', function(Blueprint $table)
+		Schema::create('insertion_user', function(Blueprint $table)
 		{
 			$table->increments('id');
 
@@ -32,7 +32,7 @@ class CreateUserInsertionTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('user_insertion');
+		Schema::drop('insertion_user');
 	}
 
 }

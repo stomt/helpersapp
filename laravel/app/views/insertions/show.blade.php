@@ -1,23 +1,47 @@
 
-<li>
+<li {{ $insertion->helpOffered > 0 ? 'data-theme="e"' : '' }}>
     <h6>
-        <span class="a">TODO / {{ $insertion->helperRequested }}</span> Helfer/Innen zugesagt
+        <span class="a">{{ $insertion->users()->sum('amount') }} / {{ $insertion->helperRequested }}</span> Helfer/Innen zugesagt
     </h6>
     <div class="address">
         Adresse: {{ $insertion->address }} <a href="https://maps.google.com/?q={{ $insertion->address }}">(Google Maps)</a>
     </div>
     <div class="time">
-    Eingestellt vor 2 Wochen | Morgen ab 03:14 Uhr gebraucht
+    Eingestellt vor {{ $insertion->created }} | {{ $insertion->howlong }} gebraucht
     </div>
     <span class="bez">Bemerkung:</span> 
     <div class="notice">
-        Hier eine Testbemerkung vom Entwickler dieser App.
+        {{ $insertion->notice }}
     </div>
-    <div data-role="controlgroup" data-type="horizontal">
-        <select class="amountHelper" data-mini="true" data-inline="true">
-            <option value="1">Ich</option>
-            <option value="2">2</option>
-        </select>
-        <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="increaseHelp" data-iid="{{ $insertion->id }}">komme!</div>
-    </div>
+    @if ($insertion->user_id == Session::get('user_id'))
+        <span data-mini="true" data-role="button" data-theme="e" class="delete" data-iid="{{ $insertion->id }}'">Löschen</span></li>
+    @else
+        <div data-role="controlgroup" data-type="horizontal">
+            
+            @if ($insertion->helpOffered > 0) 
+
+                <select class="amountHelper" data-mini="true" data-inline="true" data-theme="e">
+                    @for ($i=1; $i <= $insertion->helpOffered; $i++) 
+                        <option value="{{ $i }}" {{ $insertion->helpOffered == $i ? " selected" : "" }}>
+                            {{ $i == 1 ? "Ich" : $i }}
+                        </option>
+                    @endfor
+                </select>
+                <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="decreaseHelp" data-theme="e" data-iid="{{ $insertion->id }}">wieder absagen!</div>
+
+            @else
+
+                <select class="amountHelper" data-mini="true" data-inline="true">
+                    @for ($i=1; $i <= 30 && $i <= $insertion->helperRequested - $insertion->users()->sum('amount'); $i++) 
+                        <option value="{{ $i }}" {{ $insertion->helpOffered == $i ? " selected" : "" }}>
+                            {{ $i == 1 ? "Ich" : $i }}
+                        </option>
+                    @endfor
+                </select>
+                <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="increaseHelp" data-iid="{{ $insertion->id }}">komme!</div>
+                
+            @endif
+
+        </div>
+    @endif
 </li>
