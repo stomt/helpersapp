@@ -48,9 +48,5 @@ class Admin extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->email;
 	}
-
-	public function hasCity()
-	{
-		return $this->city_id != '';
-	}
+	
 }
