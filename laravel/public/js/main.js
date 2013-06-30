@@ -74,6 +74,8 @@ $(document)
                             }
                         }).success(function(data) {
                             if (data.success) {
+                                city = data.city;
+                                cities = data.cities;
                                 $.mobile.changePage($('#offerHelp'));
                             }
                         });
