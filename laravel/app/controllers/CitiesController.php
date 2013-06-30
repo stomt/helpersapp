@@ -51,8 +51,7 @@ class CitiesController extends BaseController {
                 $user = User::live();
                 $user->city_id = $city->id;
                 $user->save();
-                $result["success"] = true;
-                $result["city_id"] = $city->id;
+                return $this->index();
             }
         }
         
