@@ -53,12 +53,12 @@
             </ul>
         </div><!-- /content -->
 
-        <div data-role="footer" data-theme="c">
-            <a href="http://philippzentner.de" title="Gründer von stomt">Philipp Zentner</a> <a href="http://www.linkedin.com/in/maxklenk" title="Max Klenk">Max Klenk</a> <a href="http://stomt.com" title="stomt - Feedback">stomt</a> | <small>Version <!-- TODO --></small> | <a href="#impressum">Impressum</a>
-        </div><!-- /footer -->
-
+        <div data-role="footer" data-position="fixed">
+            <a href="http://philippzentner.de" title="Gründer von stomt">Philipp Zentner</a>  <a href="http://www.linkedin.com/in/maxklenk" title="Max Klenk">Max Klenk</a><br/>
+            <a href="http://stomt.com" title="stomt - Feedback">stomt</a>  v2.0.0 
+            <a href="#impressum" title="Impressum">Kontakt</a>
+        </div>
     </div><!-- /page -->
-
 
     <!-- INCLUDE -->
     <div data-role="page" id="helpdata">
@@ -115,6 +115,12 @@
             94032 Passau<br>
             <a href="mailto:flut@stomt.com">flut@stomt.com</a>
             <p>SSL-Lizenz bereit gestellt durch <a href="https://www.aditsystems.de/">Anton Dollmaier</a></p>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <a href="http://philippzentner.de" title="Gründer von stomt">Philipp Zentner</a>  <a href="http://www.linkedin.com/in/maxklenk" title="Max Klenk">Max Klenk</a><br/>
+            <a href="http://stomt.com" title="stomt - Feedback">stomt</a>  v2.0.0 
+            <a href="#impressum" title="Impressum">Kontakt</a>
         </div>
     </div>
 
