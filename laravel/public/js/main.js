@@ -95,6 +95,7 @@ $(document)
                     }).success(function(data) {
                         if (data.success) {
                             city = data.city_id;
+                            cities = data.cities;
                             setHeader(city);
                         } else {
                             $.mobile.changePage($('#home'));
@@ -103,6 +104,35 @@ $(document)
                 } else {
                     setHeader(city);
                 }
+
+                var date = new Date();
+                var offset = new Date().getTimezoneOffset();
+                // Set current date
+                var day = date.getUTCDay();
+                var days = new Array();
+                days[0] = "Sonntag";
+                days[1] = "Montag";
+                days[2] = "Dienstag";
+                days[3] = "Mittwoch";
+                days[4] = "Donnerstag";
+                days[5] = "Freitag";
+                days[6] = "Samstag";
+
+                for (var i = 0; i <= days.length; i++) {
+                    if (i == 0) {
+                        $('#choice-day-'+i).html('Heute (' + days[(day + i) % days.length] + ')');
+                    } else if (i == 1) {
+                        $('#choice-day-'+i).html('Morgen (' + days[(day + i) % days.length] + ')');
+                    } else {
+                        $('#choice-day-'+i).html(days[(day + i) % days.length]);
+                    }
+                };
+                $('#select-choice-day').selectmenu("refresh", true);
+
+                // Set current time
+                var hour = date.getUTCHours() - offset / 60;
+                $('#choice-hour-' + hour).attr('selected', true);
+                $('#select-choice-hours').selectmenu("refresh", true);
             })
 
             // POST Insertion
@@ -114,11 +144,11 @@ $(document)
 
                     // Validate Input
                     if(IsValidAmount($('#helperRequested').val()) == false){
-                        alert("Bitte gib eine Zahl ein!");
+                        alert("Bitte gib die Anzahl der Helfer an.");
                         return false;
                     }
-                    if($('#amountHelper').val() == '' || $('#address').val() == ''){
-                        alert("Adresse und Anzahl Helfer sind Pflicht!");
+                    if($.trim($('#address').val()) == ''){
+                        alert("Bitte gib eine Adresse an.");
                         return false;
                     }
 
@@ -151,7 +181,7 @@ $(document)
 
             // GET City
             .on('pagebeforeshow',function(event){
-                $('.city').html("Übersicht");
+                $('.city').html("Deine Übersicht");
 
 
                 $.ajax({

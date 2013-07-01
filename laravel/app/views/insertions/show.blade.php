@@ -9,6 +9,11 @@
     <div class="time">
     Eingestellt vor {{ $insertion->created }} | {{ $insertion->howlong }} gebraucht
     </div>
+    @if($insertion->number)
+        <div class="time">
+        Telefonnummer: {{ $insertion->number }}
+        </div>
+    @endif
     <span class="bez">Bemerkung:</span> 
     <div class="notice">
         {{ $insertion->notice }}

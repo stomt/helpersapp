@@ -48,7 +48,7 @@ class InsertionsController extends BaseController {
 
         $city = City::find($city_id);
         if ($city) {
-            $input = Input::only('address', 'helperRequested', 'notice', 'date', 'time');
+            $input = Input::only('address', 'helperRequested', 'notice', 'select-choice-day', 'select-choice-hours', 'select-choice-minutes', 'number');
             $validation = Validator::make($input, Insertion::$rules);
             if ($validation->passes()) {
                 $insertion = new Insertion();
@@ -57,8 +57,17 @@ class InsertionsController extends BaseController {
                 
                 $insertion->address = $input['address'];
                 $insertion->helperRequested = $input['helperRequested'];
+                $insertion->number = $input['number'];
                 $insertion->notice = $input['notice'];
-                $insertion->howlong = date('Y-m-d H:i:s',strtotime($input['date'].' '.$input['time']));
+
+                $date = mktime(
+                    $input['select-choice-hours'], 
+                    $input['select-choice-minutes'], 
+                    0,
+                    date("m"),
+                    date("d")+$input['select-choice-day'],
+                    date("Y"));
+                $insertion->howlong = date('Y-m-d H:i:s', $date);
                 
                 if ($insertion->save()) {
                     $result["success"] = true;
