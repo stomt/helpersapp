@@ -40,7 +40,7 @@ class HelpController extends BaseController {
         }
 
         if ($result["success"]) {
-            $insertions = $city->insertions;
+            $insertions = $city->currentInsertions();
             $result["html"] = InsertionsController::renderInsertions($insertions);
         }
         
