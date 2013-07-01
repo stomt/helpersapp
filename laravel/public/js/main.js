@@ -181,7 +181,7 @@ $(document)
 
             // GET City
             .on('pagebeforeshow',function(event){
-                $('.city').html("Übersicht");
+                $('.city').html("Deine Übersicht");
 
 
                 $.ajax({

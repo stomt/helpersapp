@@ -27,7 +27,8 @@
 
     <div data-role="page" id="home">
         <div data-role="header" data-type="horizontal">
-            <h3><a href="/">flut.stomt.de</a><br>Fluthilfe-Koordinator</h3>
+            <a href="http://www.stomt.de" data-icon="star">Stomt.de</a>
+            <h1>Fluthilfe-Koordinator</h1>
         </div><!-- /header -->
 
         <div data-role="content">
@@ -61,9 +62,10 @@
 
     <!-- INCLUDE -->
     <div data-role="page" id="helpdata">
-        <div data-role="header" data-type="horizontal">
-            <div data-role="navbar"><ul><li><a href="#helpdata" data-theme="c" class="ui-btn-active ui-state-persist">Meine Hilfe-Daten</a></li></ul></div>
-            <div><h4>Flut-Hilfe: <a href="#home"><span class="city"></span></a></h4></div>
+        <div data-role="header">
+            <a href="#home" data-icon="home">Home</a>
+            <h1 class="city"></h1>
+            <a href="#helpdata" data-icon="gear">Your Page</a>
         </div><!-- /header -->
 
         <div data-role="navbar">
@@ -79,10 +81,11 @@
 
 
     <div data-role="page" id="offerHelp">
-        <div data-role="header" data-type="horizontal">
-            <div data-role="navbar"><ul><li><a href="#helpdata" data-theme="c">Meine Hilfe-Daten</a></li></ul></div>
-            <div><h4>Flut-Hilfe: <a href="#home"><span class="city"></span></a></h4></div>
-        </div>
+        <div data-role="header">
+            <a href="#home" data-icon="home">Home</a>
+            <h1 class="city"></h1>
+            <a href="#helpdata" data-icon="gear">Your Page</a>
+        </div><!-- /header -->
 
         <div data-role="navbar">
             <ul>
@@ -98,10 +101,11 @@
 
 
     <div data-role="page" id="impressum">
-        <div data-role="header" data-type="horizontal">
-            <div data-role="navbar"><ul><li><a href="#helpdata" data-theme="c">Meine Hilfe-Daten</a></li></ul></div>
-            <div><h4><a href="#home">Zurück zum Start</a></h4></div>
-        </div>
+        <div data-role="header">
+            <a href="#home" data-icon="home">Home</a>
+            <h1>Impressum</h1>
+            <a href="#helpdata" data-icon="gear">Your Page</a>
+        </div><!-- /header -->
 
         <div data-role="content">
             <h2>Impressum</h2>
@@ -117,10 +121,11 @@
 
 
     <div data-role="page" id="searchHelp">
-        <div data-role="header" data-type="horizontal">
-            <div data-role="navbar"><ul><li><a href="#helpdata" data-theme="c">Meine Hilfe-Daten</a></li></ul></div>
-            <div><h4>Flut-Hilfe: <a href="#home"><span class="city"></span></a></h4></div>
-        </div>
+        <div data-role="header">
+            <a href="#home" data-icon="home">Home</a>
+            <h1 class="city"></h1>
+            <a href="#helpdata" data-icon="gear">Your Page</a>
+        </div><!-- /header -->
 
         <div data-role="navbar">
             <ul>
