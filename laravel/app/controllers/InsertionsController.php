@@ -27,22 +27,7 @@ class InsertionsController extends BaseController {
         $city = City::find($city_id);
         if ($city) {
             $user = User::live();
-            $insertions = $city->insertions->filter(function($insertion) use ($user)
-            {
-                $from = strtotime($insertion->howlong);
-                $time = time();
-                if (($time < $from) || ($time >= $from && $time <= ($from+1440000) && date('Ymd') == date('Ymd', $from))) {
-                    if ($insertion->users()->sum('amount') == $insertion->helperRequested) {
-                        if ($insertion->user_id == $user->id) {
-                            return $insertion;
-                        } elseif ($insertion->users()->where('user_id', $user->id)->first()) {
-                            return $insertion;
-                        }
-                    } else {
-                        return $insertion;
-                    }
-                }
-            });
+            $insertions = $city->currentInsertions();
 
             $result["success"] = true;
             $result["html"] = static::renderInsertions($insertions);
