@@ -129,29 +129,55 @@
             </ul>
         </div>
 
+        <div data-role="content">
+            <form id="helpRequest" name="helpRequest">
 
-        <form id="helpRequest" name="helpRequest">
-            <h3>Nach sofortiger Hilfe fragen</h3>
-            <label for="address">Adresse:</label>
-            <input type="text" name="address" id="address" data-mini="true" />
+                <h3>Nach sofortiger Hilfe fragen</h3>
 
-            <label for="helperRequested">Anzahl Helfer benötigt:</label>
-            <div style="width:75px">
-                <input type="text" data-inline="true" name="helperRequested" maxlength="3" id="helperRequested" data-mini="true" placeholder="(Zahl)" />
-            </div>
+                <label for="address">Adresse:</label>
+                <input type="text" name="address" id="address" data-mini="true" />
 
-            <label for="Datum">Ab wann? (Datum / Zeit)</label>
-            <div class="datetime">
-                   <div><input type="date" name="date" value="<?php echo date('d.m.Y'); ?>"  /></div>
-                   <div><input type="time" name="time" value="<?php echo date('H:i'); ?>"  /></div>
-            </div>
-            <div style="clear: both"></div>
+                <label for="helperRequested">Anzahl Helfer benötigt:</label>
+                <input type="range" name="helperRequested" id="helperRequested" value="10" min="1" max="100" data-mini="true"/>
 
-            <label for="notice">Bemerkung (optional, max. 120 Zeichen):</label>
-            <input type="text" name="notice" id="notice" maxlength="120" data-mini="true" />
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>Ab wann? (Tag / Uhrzeit):</legend>
+                    <label for="select-choice-day">Tag</label>
+                    <select name="select-choice-day" id="select-choice-day" data-mini="true">
+                       <option id="choice-day-0" value="0">Heute</option>
+                       <option id="choice-day-1" value="1">Morgen</option>
+                       <option id="choice-day-2" value="2">in 2 Tagen</option>
+                       <option id="choice-day-3" value="3">in 3 Tagen</option>
+                       <option id="choice-day-4" value="4">in 4 Tagen</option>
+                       <option id="choice-day-5" value="5">in 5 Tagen</option>
+                       <option id="choice-day-6" value="6">in 6 Tagen</option>
+                    </select> 
+                    
+                    <label for="select-choice-hours">Stunden</label>
+                    <select name="select-choice-hours" id="select-choice-hours" data-mini="true">
+                        @for ($i=0; $i < 23; $i++) 
+                            <option id="choice-hour-{{ $i }}"value="{{ $i }}">{{ $i }} h</option>
+                        @endfor
+                    </select>
+                
+                    <label for="select-choice-minutes">Minuten</label>
+                    <select name="select-choice-minutes" id="select-choice-minutes" data-mini="true">
+                        <option value="00">00 min</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select>
+                </fieldset>
 
-            <span data-role="button" id="createHelpRequest" data-mini="true">Eintragen</span>
-        </form>
+                <label for="number">Telefonnummer:</label>
+                <input type="tel" name="number" id="number" data-mini="true" />
+
+                <label for="notice">Bemerkung (optional, max. 120 Zeichen):</label>
+                <textarea name="notice" id="notice" data-mini="true" maxlength="120" ></textarea>
+
+                <span data-role="button" id="createHelpRequest" data-mini="true">Eintragen</span>
+            </form>
+        </div>
     </div>
 
 </body>
