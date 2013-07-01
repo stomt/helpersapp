@@ -7,7 +7,7 @@
         Adresse: {{ $insertion->address }} <a href="https://maps.google.com/?q={{ $insertion->address }}">(Google Maps)</a>
     </div>
     <div class="time">
-    Eingestellt vor {{ $insertion->created }} | {{ $insertion->howlong }} gebraucht
+    Eingestellt vor {{ $insertion->created }} | {{ $insertion->howlong }}
     </div>
     @if($insertion->number)
         <div class="time">

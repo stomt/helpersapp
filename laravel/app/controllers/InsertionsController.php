@@ -26,7 +26,23 @@ class InsertionsController extends BaseController {
 
         $city = City::find($city_id);
         if ($city) {
-            $insertions = $city->insertions;
+            $user = User::live();
+            $insertions = $city->insertions->filter(function($insertion) use ($user)
+            {
+                $from = strtotime($insertion->howlong);
+                $time = time();
+                if (($time < $from) || ($time >= $from && $time <= ($from+1440000) && date('Ymd') == date('Ymd', $from))) {
+                    if ($insertion->users()->sum('amount') == $insertion->helperRequested) {
+                        if ($insertion->user_id == $user->id) {
+                            return $insertion;
+                        } elseif ($insertion->users()->where('user_id', $user->id)->first()) {
+                            return $insertion;
+                        }
+                    } else {
+                        return $insertion;
+                    }
+                }
+            });
 
             $result["success"] = true;
             $result["html"] = static::renderInsertions($insertions);
@@ -127,11 +143,13 @@ class InsertionsController extends BaseController {
         $user = User::live();
         $insertions = Insertion::with('users')->get()->filter(function($insertion) use ($user)
         {
-            if ($insertion->user_id == $user->id) {
-                return $insertion;
-            } elseif ($insertion->users()->where('user_id', $user->id)->first()) {
-                return $insertion;
-            }
+            if ($insertion->user_id == $user->id || $insertion->users()->where('user_id', $user->id)->first()) {
+                $from = strtotime($insertion->howlong);
+                $time = time();
+                if (($time < $from) || ($time >= $from && $time <= ($from+1440000) && date('Ymd') == date('Ymd', $from))) {
+                    return $insertion;
+                }
+            } 
         });
 
         $result["success"] = true;
@@ -184,13 +202,13 @@ class InsertionsController extends BaseController {
                 $tomorrow = date('Y-m-d', strtotime('tomorrow'));
                 $day_after_tomorrow = date('Y-m-d', strtotime('tomorrow + 1 day'));
                 if ($date == date('Y-m-d')){
-                    return "Ab ".date('H:i',$from).' Uhr gebraucht';
+                    return "Ab ".date('H:i',$from).' Uhr gebraucht!';
                 } elseif ($date == $tomorrow) {
-                    return "Morgen ab ".date('H:i',$from).' Uhr gebraucht';
+                    return "Morgen ab ".date('H:i',$from).' Uhr gebraucht!';
                 } elseif ($date == $day_after_tomorrow) {
-                    return "Übermorgen ab ".date('H:i',$from).' Uhr gebraucht';
+                    return "Übermorgen ab ".date('H:i',$from).' Uhr gebraucht!';
                 } else {
-                    return "Ab ".date('d.m.Y H:i',$from).' Uhr gebraucht';
+                    return "Ab ".date('d.m.Y H:i',$from).' Uhr gebraucht!';
                 }
             }
         }
