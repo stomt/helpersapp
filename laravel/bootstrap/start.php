@@ -29,7 +29,7 @@ $app->redirectIfTrailingSlash();
 $env = $app->detectEnvironment(array(
 
 	'local-maxklenk' => array('mk-asus-linux'),
-	'local-philippzentner' => array('MACHINE-NAME'),
+	'local-philippzentner' => array('flut.local*'),
 
 ));
 

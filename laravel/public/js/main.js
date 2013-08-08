@@ -1,7 +1,8 @@
 var city    = null,
     cities  = null,
     baseUrl = '//'+document.location.hostname+':'+location.port+'/cities',
-    tc      = 'tap' // tap or click?
+    tc      = 'tap', // tap or click?
+    homeUsed = false
     ;
 
 function IsValidAmount(value){
@@ -16,7 +17,6 @@ function IsValidAmount(value){
         return false;
     return true;
 }
-
 $(document)
     .bind('pageinit',function(){
 
@@ -34,28 +34,54 @@ $(document)
             $("#helpRequests").html(content).trigger('create');
         }
 
+        $('a[data-icon="home"]').on(tc,function(){
+            homeUsed=true;
+            $.mobile.changePage($('#home'));
+        });
 
         // Startpage
         $('#home')
-
             // GET City
             .on('pagebeforeshow',function(event){
-                if(city == null){
+                if(homeUsed == false){
                     $.ajax({
                         url: baseUrl,
-                        context: this
-                    }).success(function(data) {
-                        if (data.success) {
-                            city = data.city_id;
-                            cities = data.cities;
-                            setHeader(city);
-                            $.mobile.changePage($('#offerHelp'));
-                        }
-                    });
+                        context: this,
+                        dataType: 'json'
+                    })
+                        .success(function(data) {
+                            if (data.success) {
+                                cities = data.cities;
+
+                                var hash = window.location.hash,
+                                    hCity = hash.substr(1,hash.length),
+                                    index = false;
+                                if(hCity!=''){
+
+                                    // if city
+                                    $.each( cities, function( key, value ) {
+                                        if(value == hCity){
+                                            city = key;
+                                            $.mobile.changePage($('#offerHelp'));
+                                        }
+                                    });
+                                }else{
+                                    if(city == null){
+                                        city = data.city_id;
+                                    }
+
+                                    setHeader(city);
+                                    $.mobile.changePage($('#offerHelp'));
+                                }
+                            }
+                        });
+                }else{
+                    homeUsed = false;
                 }
+
             })
 
-            // POST City 
+            // POST City
             .on('pageshow',function(){
                 $('.chooseCity')
                     .on('change',function(e){
@@ -73,12 +99,12 @@ $(document)
                                 "city_id" : city
                             }
                         }).success(function(data) {
-                            if (data.success) {
-                                city = data.city;
-                                cities = data.cities;
-                                $.mobile.changePage($('#offerHelp'));
-                            }
-                        });
+                                if (data.success) {
+                                    city = data.city;
+                                    cities = data.cities;
+                                    $.mobile.changePage($('#offerHelp'));
+                                }
+                            });
                     });
             });
 
@@ -93,14 +119,14 @@ $(document)
                         url: baseUrl,
                         context: this
                     }).success(function(data) {
-                        if (data.success) {
-                            city = data.city_id;
-                            cities = data.cities;
-                            setHeader(city);
-                        } else {
-                            $.mobile.changePage($('#home'));
-                        }
-                    });
+                            if (data.success) {
+                                city = data.city_id;
+                                cities = data.cities;
+                                setHeader(city);
+                            } else {
+                                $.mobile.changePage($('#home'));
+                            }
+                        });
                 } else {
                     setHeader(city);
                 }
@@ -153,22 +179,22 @@ $(document)
                     }
 
                     // var recieved = false;
-                    // var started = false; 
+                    // var started = false;
                     // if(started == false){
                     //     started = true;
-                        $.ajax({
-                            type: "post",
-                            url: baseUrl+"/"+city+"/insertions",
-                            context: this,
-                            data: $(this).parent().serialize()
-                        }).success(function(data) {
+                    $.ajax({
+                        type: "post",
+                        url: baseUrl+"/"+city+"/insertions",
+                        context: this,
+                        data: $(this).parent().serialize()
+                    }).success(function(data) {
                             // if (recieved == false) {
                             //     recieved = true;
-                                if (data.success){
-                                    $.mobile.changePage($('#offerHelp'));
-                                } else {
-                                    alert("Ein Fehler ist aufgetreten");
-                                }
+                            if (data.success){
+                                $.mobile.changePage($('#offerHelp'));
+                            } else {
+                                alert("Ein Fehler ist aufgetreten");
+                            }
                             // }
                         });
                     // }
@@ -188,13 +214,13 @@ $(document)
                     url: baseUrl+"/myhelp",
                     context: this
                 }).success(function(data) {
-                    if (data.success) {
-                        $("#helpDataReq").html(data.html).trigger('create');
-                    }
-                });
+                        if (data.success) {
+                            $("#helpDataReq").html(data.html).trigger('create');
+                        }
+                    });
             })
 
-   
+
 
             .on('pageshow',function(){
                 $(this)
@@ -208,22 +234,22 @@ $(document)
                         $(this)
                             .html('<span class="ui-btn-inner"><span class="ui-btn-text">Bitte warten...</span></span>')
                             .removeAttr('data-role');
-                        
+
                         var amount = $(this).data('amount');
-                        
+
                         $.ajax({
                             type: "post",
                             url: baseUrl+"/"+city+"/insertions/"+$(this).data('iid')+"/help",
                             context: this,
                             data: {
-                                "amount" : amount 
+                                "amount" : amount
                             },
                             dataType: 'json'
                         }).success(function(data) {
-                            if (data.success) {
-                                $("#helpDataReq").html(data.html).trigger('create');
-                            }
-                        });
+                                if (data.success) {
+                                    $("#helpDataReq").html(data.html).trigger('create');
+                                }
+                            });
                     })
 
 
@@ -235,7 +261,7 @@ $(document)
 
                         var amount = parseInt($('select.amountHelper option:selected').val());
                         var button = $(this).parent().parent().parent().find('.help');
-                        
+
                         if (button.data('help') == 'increaseHelp') {
                             button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'kommen!' : 'komme!') + '</span></span>')
                                 .data('amount', amount);
@@ -257,12 +283,12 @@ $(document)
                             context: this,
                             dataType: 'json'
                         }).success(function(data) {
-                            if (data.success) {
-                                $("#helpDataReq").html(data.html).trigger('create');
-                            } else {
-                                alert("Fehler beim Löschen der Hilfe-Anfrage.")
-                            }
-                        });
+                                if (data.success) {
+                                    $("#helpDataReq").html(data.html).trigger('create');
+                                } else {
+                                    alert("Fehler beim Löschen der Hilfe-Anfrage.")
+                                }
+                            });
                     })
             });
 
@@ -270,50 +296,23 @@ $(document)
         // Index Insertion
         $('#offerHelp')
 
-            // GET Insertions (and GET City) 
+            // GET Insertions (and GET City)
             .on( 'pagebeforeshow',function(event){
-                if (city == null) {
+                if(city==null) window.location = '/';
 
-                    // request city_id first
-                    $.ajax({
-                        url: baseUrl,
-                        context: this
-                    }).success(function(data) {
-                        if (data.success) {
-                            city = data.city_id;
-                            cities = data.cities;
-                            setHeader(city);
+                setHeader(city);
+                // load content immediately
+                $.ajax({
+                    url: baseUrl+"/" + city + "/insertions",
+                    context: this
+                }).done(function(data) {
+                    if (data.success) {
+                        setContent(data.html);
+                    } else {
+                        //alert('ERROR: TODO')
+                    }
+                });
 
-                            // load content after recieving city_id
-                            $.ajax({
-                                url: baseUrl+"/" + city + "/insertions",
-                                context: this
-                            }).done(function(data) {
-                                if (data.success) {
-                                    setContent(data.html);
-                                } else {
-                                    alert('ERROR: TODO')
-                                }
-                            }); 
-                        } else {
-                            $.mobile.changePage($('#home'));
-                        }
-                    });
-
-                } else {
-                    setHeader(city);
-                    // load content imidiatly
-                    $.ajax({
-                        url: baseUrl+"/" + city + "/insertions",
-                        context: this
-                    }).done(function(data) {
-                        if (data.success) {
-                            setContent(data.html);
-                        } else {
-                            alert('ERROR: TODO')
-                        }
-                    }); 
-                }
             })
 
             // Interaction with Insertion
@@ -332,12 +331,12 @@ $(document)
                             context: this,
                             dataType: 'json'
                         }).success(function(data) {
-                            if (data.success) {
-                                setContent(data.html);
-                            } else {
-                                alert("Fehler beim Löschen der Hilfe-Anfrage.")
-                            }
-                        });
+                                if (data.success) {
+                                    setContent(data.html);
+                                } else {
+                                    alert("Fehler beim Löschen der Hilfe-Anfrage.")
+                                }
+                            });
                     })
 
                     // JOIN/LEAVE Insertion
@@ -350,22 +349,22 @@ $(document)
                         $(this)
                             .html('<span class="ui-btn-inner"><span class="ui-btn-text">Bitte warten...</span></span>')
                             .removeAttr('data-role');
-                        
+
                         var amount = $(this).data('amount');
-                        
+
                         $.ajax({
                             type: "post",
                             url: baseUrl+"/"+city+"/insertions/"+$(this).data('iid')+"/help",
                             context: this,
                             data: {
-                                "amount" : amount 
+                                "amount" : amount
                             },
                             dataType: 'json'
                         }).success(function(data) {
-                            if (data.success) {
-                                setContent(data.html);
-                            }
-                        });
+                                if (data.success) {
+                                    setContent(data.html);
+                                }
+                            });
                     })
 
 
@@ -377,7 +376,7 @@ $(document)
 
                         var amount = parseInt($('select.amountHelper option:selected').val());
                         var button = $(this).parent().parent().parent().find('.help');
-                        
+
                         if (button.data('help') == 'increaseHelp') {
                             button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'kommen!' : 'komme!') + '</span></span>')
                                 .data('amount', amount);
@@ -387,5 +386,6 @@ $(document)
                         }
                     })
             });
-    
+
     });
+
