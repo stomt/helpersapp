@@ -34,6 +34,7 @@ $(document)
             $("#helpRequests").html(content).trigger('create');
         }
 
+        // Change to startpage and prevent ajax-call by setting homeUsed=true
         $('a[data-icon="home"]').on(tc,function(){
             homeUsed=true;
             $.mobile.changePage($('#home'));
@@ -41,25 +42,23 @@ $(document)
 
         // Startpage
         $('#home')
-            // GET City
             .on('pagebeforeshow',function(event){
-                if(homeUsed == false){
-                    $.ajax({
+                if(homeUsed == false){                                          // Page impression by home-button or adress-bar?
+                    $.ajax({                                                    // Get list if available locations
                         url: baseUrl,
                         context: this,
                         dataType: 'json'
                     })
                         .success(function(data) {
                             if (data.success) {
-                                cities = data.cities;
 
-                                var hash = window.location.hash,
-                                    hCity = hash.substr(1,hash.length),
+                                cities = data.cities;                           // Set available locations
+
+                                var hash = window.location.hash,                // Get Hash-URI
+                                    hCity = hash.substr(1,hash.length),         // Remove the #
                                     index = false;
                                 if(hCity!=''){
-
-                                    // if city
-                                    $.each( cities, function( key, value ) {
+                                    $.each( cities, function( key, value ) {    // Validate URIs location and change to location if possible
                                         if(value == hCity){
                                             city = key;
                                             $.mobile.changePage($('#offerHelp'));
@@ -76,6 +75,7 @@ $(document)
                             }
                         });
                 }else{
+                    // The home-button has been used, reset to false to prevent the ajax-call above
                     homeUsed = false;
                 }
 
