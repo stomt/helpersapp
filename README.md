@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 flut.app
 ========
 
@@ -25,3 +26,9 @@ Testserver starten
 
     php artisan serve
 
+=======
+helperapp
+=========
+
+A mobile web app for fast and efficient helper coordination
+>>>>>>> 0326fbad6827132461ec6435d08aebc2dd49fde6
