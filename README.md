@@ -19,7 +19,7 @@ Laravel Depencies installieren
 local Environment in `/bootstrap/start.php` Zeile 32 einrichten
 
     // MACHINE-NAME durch name des Entwickungsrechners ersetzen
-    'local-philippzentner' => array('MACHINE-NAME'),
+    'local-machinename' => array('MACHINE-NAME'),
  
 Datenbank migrieren
 
