@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 
     <script type="text/javascript" src="/js/main.js"></script>
@@ -53,8 +54,8 @@
         </div><!-- /content -->
 
         <div data-role="footer" data-position="fixed">
-            <a href="http://stomt.com" title="stomt - Feedback">stomt</a>  v2.0.1
-            <a href="#impressum" title="Impressum">Kontakt</a>
+            <a href="http://stomt.com" title="stomt - Feedback">stomt</a>  <small>v2.0.1</small>
+            <a href="#impressum" title="Impressum">Contact</a>
         </div>
     </div><!-- /page -->
 

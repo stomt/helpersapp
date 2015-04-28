@@ -26,7 +26,7 @@ $(document)
             if (cities && city) {
                 $('.city').html(cities[city]);
             } else {
-                $('.city').html("Übersicht");
+                $('.city').html("Overview");
             }
         }
 
@@ -136,19 +136,19 @@ $(document)
                 // Set current date
                 var day = date.getUTCDay();
                 var days = new Array();
-                days[0] = "Sonntag";
-                days[1] = "Montag";
-                days[2] = "Dienstag";
-                days[3] = "Mittwoch";
-                days[4] = "Donnerstag";
-                days[5] = "Freitag";
-                days[6] = "Samstag";
+                days[0] = "Sunday";
+                days[1] = "Monday";
+                days[2] = "Tuesday";
+                days[3] = "Wednesday";
+                days[4] = "Thursday";
+                days[5] = "Friday";
+                days[6] = "Saturday";
 
                 for (var i = 0; i <= days.length; i++) {
                     if (i == 0) {
-                        $('#choice-day-'+i).html('Heute (' + days[(day + i) % days.length] + ')');
+                        $('#choice-day-'+i).html('Today (' + days[(day + i) % days.length] + ')');
                     } else if (i == 1) {
-                        $('#choice-day-'+i).html('Morgen (' + days[(day + i) % days.length] + ')');
+                        $('#choice-day-'+i).html('Tomorrow (' + days[(day + i) % days.length] + ')');
                     } else {
                         $('#choice-day-'+i).html(days[(day + i) % days.length]);
                     }
@@ -170,11 +170,11 @@ $(document)
 
                     // Validate Input
                     if(IsValidAmount($('#helperRequested').val()) == false){
-                        alert("Bitte gib die Anzahl der Helfer an.");
+                        alert("How many helpers are nedded?");
                         return false;
                     }
                     if($.trim($('#address').val()) == ''){
-                        alert("Bitte gib eine Adresse an.");
+                        alert("Please enter an address");
                         return false;
                     }
 
@@ -193,7 +193,7 @@ $(document)
                             if (data.success){
                                 $.mobile.changePage($('#offerHelp'));
                             } else {
-                                alert("Ein Fehler ist aufgetreten");
+                                alert("Something failed.");
                             }
                             // }
                         });
@@ -207,7 +207,7 @@ $(document)
 
             // GET City
             .on('pagebeforeshow',function(event){
-                $('.city').html("Deine Übersicht");
+                $('.city').html("Your overview");
 
 
                 $.ajax({
@@ -232,7 +232,7 @@ $(document)
 
                         // set loadingstate
                         $(this)
-                            .html('<span class="ui-btn-inner"><span class="ui-btn-text">Bitte warten...</span></span>')
+                            .html('<span class="ui-btn-inner"><span class="ui-btn-text">Please wait...</span></span>')
                             .removeAttr('data-role');
 
                         var amount = $(this).data('amount');
@@ -263,10 +263,10 @@ $(document)
                         var button = $(this).parent().parent().parent().find('.help');
 
                         if (button.data('help') == 'increaseHelp') {
-                            button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'kommen!' : 'komme!') + '</span></span>')
+                            button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'are coming!' : 'come!') + '</span></span>')
                                 .data('amount', amount);
                         } else {
-                            button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'wieder absagen!' : 'sage ab!') + '</span></span>')
+                            button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'Revoke '+amount : 'Revoke!') + '</span></span>')
                                 .data('amount', -amount);
                         }
                     })
@@ -286,7 +286,7 @@ $(document)
                                 if (data.success) {
                                     $("#helpDataReq").html(data.html).trigger('create');
                                 } else {
-                                    alert("Fehler beim Löschen der Hilfe-Anfrage.")
+                                    alert("Deleting the help-request failed.")
                                 }
                             });
                     })
@@ -334,7 +334,7 @@ $(document)
                                 if (data.success) {
                                     setContent(data.html);
                                 } else {
-                                    alert("Fehler beim Löschen der Hilfe-Anfrage.")
+                                    alert("Deleting the help-request failed.")
                                 }
                             });
                     })
@@ -347,7 +347,7 @@ $(document)
 
                         // set loadingstate
                         $(this)
-                            .html('<span class="ui-btn-inner"><span class="ui-btn-text">Bitte warten...</span></span>')
+                            .html('<span class="ui-btn-inner"><span class="ui-btn-text">Please wait...</span></span>')
                             .removeAttr('data-role');
 
                         var amount = $(this).data('amount');
@@ -378,10 +378,10 @@ $(document)
                         var button = $(this).parent().parent().parent().find('.help');
 
                         if (button.data('help') == 'increaseHelp') {
-                            button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'kommen!' : 'komme!') + '</span></span>')
+                            button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'will come!' : 'will come!') + '</span></span>')
                                 .data('amount', amount);
                         } else {
-                            button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'wieder absagen!' : 'sage ab!') + '</span></span>')
+                            button.html('<span class="ui-btn-inner"><span class="ui-btn-text">' + (amount > 1 ? 'Revoke '+amount : 'Revoke!') + '</span></span>')
                                 .data('amount', -amount);
                         }
                     })
