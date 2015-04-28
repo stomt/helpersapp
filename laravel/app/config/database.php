@@ -46,23 +46,23 @@ return array(
 
 	'connections' => array(
 
-		'sqlite' => array(
+		/*'sqlite' => array(
 			'driver'   => 'sqlite',
 			'database' => __DIR__.'/../database/production.sqlite',
 			'prefix'   => '',
-		),
+		),*/
 
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'flut',
-			'username'  => 'root',
-			'password'  => 'KPiRbrRwNXYumRaFNrs4',
+			'database'  => 'helpersapp',
+			'username'  => 'forge',
+			'password'  => 'PQe9BCmbGRnQpNA4DRw5',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
-
+/*
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
@@ -81,7 +81,7 @@ return array(
 			'username' => 'root',
 			'password' => '',
 			'prefix'   => '',
-		),
+		),*/
 
 	),
 

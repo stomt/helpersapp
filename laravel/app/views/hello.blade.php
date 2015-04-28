@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
     <title>Helper-App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta charset="utf-8">    
-    <meta name="description" content="Get instant help">
+    <meta name="description" content="HelpersApp.org - Get instant help">
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
