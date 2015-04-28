@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\View;
+
 class BaseController extends Controller {
 
 	/**

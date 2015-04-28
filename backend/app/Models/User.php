@@ -1,6 +1,7 @@
 <?php namespace App\Models;
 
 use Illuminate\Database\Eloquent;
+use Illuminate\Session;
 
 class User extends Eloquent {
 

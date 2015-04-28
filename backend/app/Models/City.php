@@ -2,6 +2,7 @@
 
 
 use Illuminate\Database\Eloquent;
+use App\Models\User;
 
 class City extends Eloquent {
 

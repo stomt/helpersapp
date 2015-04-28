@@ -1,5 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
+use Symfony\Component\Console\Input;
+use App\Models\City;
+use App\Models\User;
+
 class CitiesController extends BaseController {
 
     /**
@@ -26,7 +31,7 @@ class CitiesController extends BaseController {
         if (User::live()->city_id) {
             $result["success"] = true;
             $result["city_id"] = User::live()->city_id;
-            $cities;
+            $cities = [];
             foreach (City::all() as $city) {
                 $cities[$city->id] = $city->title;
             }

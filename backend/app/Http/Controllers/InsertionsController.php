@@ -1,5 +1,13 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
+use Symfony\Component\Console\Input;
+use App\Models\City;
+use App\Models\User;
+use App\Models\Insertion;
+use Symfony\Component\Security\Core\Validator;
+use Illuminate\Session;
+
 class InsertionsController extends BaseController {
 
     /**
