@@ -1,19 +1,19 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Fluthilfe-Koordinator</title>
+    <title>Helper-App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta charset="utf-8">    
-    <meta name="description" content="Schnelle und koordinierte Flut-Hilfe fürs Smartphone">
+    <meta name="description" content="Get instant help">
 
     <!-- Styles -->
-    <link rel="stylesheet" media="all" type="text/css" href="/css/jquery.mobile-1.3.1.min.css" />
-    <link rel="stylesheet" media="all" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 
     <!-- Scripts -->
-    <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.mobile-1.3.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+
     <script type="text/javascript" src="/js/main.js"></script>
 
     <!-- Fav and touch icons -->
@@ -27,15 +27,14 @@
 
     <div data-role="page" id="home">
         <div data-role="header" data-type="horizontal">
-            <a href="http://www.stomt.de" data-icon="star">Stomt.de</a>
-            <h1>Fluthilfe-Koordinator</h1>
+            <a href="http://www.stomt.de" data-icon="star">stomt.com</a>
+            <h1>Helpers-App</h1>
         </div><!-- /header -->
 
         <div data-role="content">
-            <h4>In welcher Stadt?</h4>
+            <h4>Choose your region</h4>
             <select class="chooseCity">
-                <option>Bitte Stadt wählen</option>
-
+                <option>Please choose a region</option>
                 @foreach(City::all() as $city)
 
                     <option value="{{ $city->id }}"><a data-city="{{ $city->id }}">{{ $city->title }}</a></option>
@@ -44,18 +43,17 @@
             </select>
 
             <ul>
-                <li>ohne Registrierung</li>
-                <li>schnell helfen</li>
-                <li>koordiniert helfen</li>
-                <li>schnell Hilfe bekommen</li>
-                <li>#fluthilfeapp</li>
-                <li>Feedback: <a href="mailto:flut@stomt.de">flut@stomt.de</a></li>
+                <li>no registration needed</li>
+                <li>help fast</li>
+                <li>help coordinated</li>
+                <li>get instant help</li>
+                <li>#helpersapp</li>
+                <li>Feedback: <a href="mailto:helpersapp@stomt.com">helpersapp@stomt.com</a></li>
             </ul>
         </div><!-- /content -->
 
         <div data-role="footer" data-position="fixed">
-            <a href="http://philippzentner.de" title="Gründer von stomt">Philipp Zentner</a>  <a href="http://www.linkedin.com/in/maxklenk" title="Max Klenk">Max Klenk</a><br/>
-            <a href="http://stomt.com" title="stomt - Feedback">stomt</a>  v2.0.0 
+            <a href="http://stomt.com" title="stomt - Feedback">stomt</a>  v2.0.1
             <a href="#impressum" title="Impressum">Kontakt</a>
         </div>
     </div><!-- /page -->
@@ -70,8 +68,8 @@
 
         <div data-role="navbar">
             <ul>
-                <li><a href="#offerHelp" data-show="offerHelp">Helfen</a></li>
-                <li><a href="#searchHelp" data-show="searchHelp">Brauchen Hilfe</a></li>
+                <li><a href="#offerHelp" data-show="offerHelp">Offer Help</a></li>
+                <li><a href="#searchHelp" data-show="searchHelp">Need Help</a></li>
             </ul>
         </div><!-- /navbar -->
 
@@ -89,8 +87,8 @@
 
         <div data-role="navbar">
             <ul>
-                <li><a href="#offerHelp" data-show="offerHelp" class="ui-btn-active ui-state-persist">Helfen</a></li>
-                <li><a href="#searchHelp" data-show="searchHelp">Brauchen Hilfe</a></li>
+                <li><a href="#offerHelp" data-show="offerHelp" class="ui-btn-active ui-state-persist">Offer Help</a></li>
+                <li><a href="#searchHelp" data-show="searchHelp">Need Help</a></li>
             </ul>
         </div>
 
@@ -109,16 +107,14 @@
 
         <div data-role="content">
             <h2>Impressum</h2>
-            Entwickelt und bereitgestellt durch:<br>
-            <a href="http://philippzentner.de">Philipp Zentner</a> (<a href="http://stomt.de">stomt</a>) <br>
-            Unterer Sand 3-5 (zur Zeit postalisch nicht zu erreichen)<br>
-            94032 Passau<br>
-            <a href="mailto:flut@stomt.com">flut@stomt.com</a>
-            <p>SSL-Lizenz bereit gestellt durch <a href="https://www.aditsystems.de/">Anton Dollmaier</a></p>
+            Created and offered by <a href="http://stomt.de">stomt</a>:<br>
+            Dr.-Hans-Kapfinger-Straße 12, Raum 112/113<br>
+            94032 Passau, Germany<br>
+            <a href="mailto:helpersapp@stomt.com">helpersapp@stomt.com</a>
+            <p>SSL-License through<a href="https://www.aditsystems.de/">Anton Dollmaier</a></p>
         </div>
 
         <div data-role="footer" data-position="fixed">
-            <a href="http://philippzentner.de" title="Gründer von stomt">Philipp Zentner</a>  <a href="http://www.linkedin.com/in/maxklenk" title="Max Klenk">Max Klenk</a><br/>
             <a href="http://stomt.com" title="stomt - Feedback">stomt</a>  v2.0.0 
             <a href="#impressum" title="Impressum">Kontakt</a>
         </div>
@@ -135,43 +131,43 @@
 
         <div data-role="navbar">
             <ul>
-                <li><a href="#offerHelp" data-show="offerHelp">Helfen</a></li>
-                <li><a href="#searchHelp" data-show="searchHelp" class="ui-btn-active ui-state-persist">Brauchen Hilfe</a></li>
+                <li><a href="#offerHelp" data-show="offerHelp">Offer Help</a></li>
+                <li><a href="#searchHelp" data-show="searchHelp" class="ui-btn-active ui-state-persist">Need Help</a></li>
             </ul>
         </div>
 
         <div data-role="content">
             <form id="helpRequest" name="helpRequest">
 
-                <h3>Nach sofortiger Hilfe fragen</h3>
+                <h3>Ask for instant help</h3>
 
-                <label for="address">Adresse:</label>
+                <label for="address">Address:</label>
                 <input type="text" name="address" id="address" data-mini="true" />
 
-                <label for="helperRequested">Anzahl Helfer benötigt:</label>
+                <label for="helperRequested">Amount of helpers neccessary:</label>
                 <input type="range" name="helperRequested" id="helperRequested" value="10" min="1" max="100" data-mini="true"/>
 
                 <fieldset data-role="controlgroup" data-type="horizontal">
-                    <legend>Ab wann? (Tag / Uhrzeit):</legend>
+                    <legend>When? (Day / Time):</legend>
                     <label for="select-choice-day">Tag</label>
                     <select name="select-choice-day" id="select-choice-day" data-mini="true">
-                       <option id="choice-day-0" value="0">Heute</option>
-                       <option id="choice-day-1" value="1">Morgen</option>
-                       <option id="choice-day-2" value="2">in 2 Tagen</option>
-                       <option id="choice-day-3" value="3">in 3 Tagen</option>
-                       <option id="choice-day-4" value="4">in 4 Tagen</option>
-                       <option id="choice-day-5" value="5">in 5 Tagen</option>
-                       <option id="choice-day-6" value="6">in 6 Tagen</option>
+                       <option id="choice-day-0" value="0">Today</option>
+                       <option id="choice-day-1" value="1">Tomorrow</option>
+                       <option id="choice-day-2" value="2">in 2 Day</option>
+                       <option id="choice-day-3" value="3">in 3 Day</option>
+                       <option id="choice-day-4" value="4">in 4 Day</option>
+                       <option id="choice-day-5" value="5">in 5 Day</option>
+                       <option id="choice-day-6" value="6">in 6 Day</option>
                     </select> 
                     
-                    <label for="select-choice-hours">Stunden</label>
+                    <label for="select-choice-hours">Hours</label>
                     <select name="select-choice-hours" id="select-choice-hours" data-mini="true">
-                        @for ($i=0; $i < 23; $i++) 
+                        @for ($i=0; $i < 23; ++$i)
                             <option id="choice-hour-{{ $i }}"value="{{ $i }}">{{ $i }} h</option>
                         @endfor
                     </select>
                 
-                    <label for="select-choice-minutes">Minuten</label>
+                    <label for="select-choice-minutes">Minutes</label>
                     <select name="select-choice-minutes" id="select-choice-minutes" data-mini="true">
                         <option value="00">00 min</option>
                         <option value="15">15</option>
@@ -180,16 +176,15 @@
                     </select>
                 </fieldset>
 
-                <label for="number">Telefonnummer:</label>
+                <label for="number">Phonenumber:</label>
                 <input type="tel" name="number" id="number" data-mini="true" />
 
-                <label for="notice">Bemerkung (optional, max. 120 Zeichen):</label>
+                <label for="notice">Notice (optional, max. 120 characters):</label>
                 <textarea name="notice" id="notice" data-mini="true" maxlength="120" ></textarea>
 
-                <span data-role="button" id="createHelpRequest" data-mini="true">Eintragen</span>
+                <span data-role="button" id="createHelpRequest" data-mini="true">Post</span>
             </form>
         </div>
     </div>
-
 </body>
 </html>

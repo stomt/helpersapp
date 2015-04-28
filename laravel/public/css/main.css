@@ -1,4 +1,4 @@
-body{font-family:"Lucida Grande",Helvetica,Verdana,Arial;background-color:#eee !important}
+body{font-family:Helvetica,Verdana,Arial;background-color:#eee !important}
 .address{font-weight:bold;font-size:12px}
 .time{font-size:12px;font-weight:normal}
 .bez{clear:both;font-weight:bold;display:inline;font-size:12px;}
@@ -17,7 +17,7 @@ h4{text-align:center;margin-left:auto;margin-right:auto;}
         border-left: 1px #666 outset !important;
     }
     .ui-footer {
-    	width: 520px !important;
+        width: 520px !important;
         margin: 0 auto !important;
     }
 }
@@ -29,6 +29,4 @@ h4{text-align:center;margin-left:auto;margin-right:auto;}
 .datetime :last-child{float:right}
 .help{float:left;margin-top:0px;}
 .helperRequested{float:left}
-[data-role="footer"]{
-    text-align:center;
-}
+[data-role="footer"]{text-align:center;}
