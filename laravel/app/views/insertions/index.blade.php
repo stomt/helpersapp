@@ -5,7 +5,7 @@
 			@include('insertions.show')
 		@endforeach
 	@else
-		Sei der Erste der einen Eintrag erstellt!
+        Be the next one getting help!
 	@endif
 	
 </ul>
