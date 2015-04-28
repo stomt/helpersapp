@@ -27,6 +27,8 @@ h4{text-align:center;margin-left:auto;margin-right:auto;}
 .datetime div {width:130px;}
 .datetime :first-child{float:left}
 .datetime :last-child{float:right}
-.help{float:left;margin-top:0px;}
+.help{  width: 80%;
+    float: right;
+    margin-top: 0;margin-top:0px;}
 .helperRequested{float:left}
 [data-role="footer"]{text-align:center;}
