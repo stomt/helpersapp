@@ -1,7 +1,7 @@
 <?php namespace App\Models;
-use Illuminate\Database\Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class Insertion extends Eloquent {
+class Insertion extends Model {
 
 	protected $softDelete = true;
 

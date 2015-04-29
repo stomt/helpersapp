@@ -1,10 +1,10 @@
 <?php namespace App\Models;
 
 
-use Illuminate\Database\Eloquent;
+use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class City extends Eloquent {
+class City extends Model {
 
     protected $guarded = array();
 

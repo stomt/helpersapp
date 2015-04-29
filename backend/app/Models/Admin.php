@@ -2,9 +2,9 @@
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
-use Illuminate\Database\Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Eloquent implements UserInterface, RemindableInterface {
+class Admin extends Model implements UserInterface, RemindableInterface {
 
 	/**
 	 * The database table used by the model.

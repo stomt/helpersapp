@@ -1,9 +1,9 @@
 <?php namespace App\Models;
 
-use Illuminate\Database\Eloquent;
-use Illuminate\Session;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
-class User extends Eloquent {
+class User extends Model {
 
 	public static function live()
 	{	

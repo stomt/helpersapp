@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers;
 
-use Illuminate\Http\Response;
 use Symfony\Component\Console\Input;
 use App\Models\City;
 use App\Models\User;
@@ -28,7 +27,7 @@ class CitiesController extends BaseController {
     {
         $result["success"] = false;
 
-        if (User::live()->city_id) {
+        if (User::live()->city_id !== null) {
             $result["success"] = true;
             $result["city_id"] = User::live()->city_id;
             $cities = [];
@@ -38,7 +37,7 @@ class CitiesController extends BaseController {
             $result["cities"] = $cities;
         }
 
-    	return Response::json($result);
+    	return response()->json($result);
     }
 
     /**
@@ -60,7 +59,7 @@ class CitiesController extends BaseController {
             }
         }
         
-        return Response::json($result);
+        return response()->json($result);
     }
 
 }

@@ -50,7 +50,7 @@ class HelpController extends BaseController {
             $result["html"] = InsertionsController::renderInsertions($insertions);
         }
         
-        return Response::json($result);
+        return response()->json($result);
     }
 
     private function storeHelp($insertion, $amount)

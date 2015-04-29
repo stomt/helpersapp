@@ -41,7 +41,7 @@ class InsertionsController extends BaseController {
             $result["html"] = static::renderInsertions($insertions);
         }
 
-        return Response::json($result);
+        return response()->json($result);
     }
 
 
@@ -83,7 +83,7 @@ class InsertionsController extends BaseController {
                 }
             }
         }
-        return Response::json($result);
+        return response()->json($result);
     }
 
     /**
@@ -97,7 +97,7 @@ class InsertionsController extends BaseController {
     {
         $result["success"] = false;
         // TODO
-        return Response::json($result);
+        return response()->json($result);
     }
 
     /**
@@ -126,7 +126,7 @@ class InsertionsController extends BaseController {
             $result["error"] = "Not Found";
         }
 
-        return Response::json($result);
+        return response()->json($result);
     }
 
     public function myhelp()
@@ -148,7 +148,7 @@ class InsertionsController extends BaseController {
         $result["success"] = true;
         $result["html"] = static::renderInsertions($insertions);
         
-        return Response::json($result);
+        return response()->json($result);
     }
 
     /**
