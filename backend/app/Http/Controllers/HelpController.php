@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-use Illuminate\Http\Response;
-use Symfony\Component\Console\Input;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Input;
 use App\Models\City;
 use App\Models\User;
 use App\Models\Insertion;

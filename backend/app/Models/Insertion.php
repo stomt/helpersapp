@@ -11,12 +11,12 @@ class Insertion extends Model {
 
     public function city()
     {
-    	return $this->belongsTo('City');
+    	return $this->belongsTo('App\Models\City');
     }
 
     public function users()
     {
-    	return $this->belongsToMany('User')
+    	return $this->belongsToMany('App\Models\User')
     				->withPivot('amount');
     }
 
@@ -27,7 +27,7 @@ class Insertion extends Model {
 
     public function creator()
     {
-    	return $this->hasOne('User', 'user_id');
+    	return $this->hasOne('App\Models\User', 'user_id');
     }
 
 }

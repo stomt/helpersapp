@@ -12,7 +12,7 @@ class City extends Model {
 
     public function insertions()
     {
-    	return $this->hasMany('Insertion');
+    	return $this->hasMany('App\Models\Insertion');
     }
 
     public function currentInsertions()

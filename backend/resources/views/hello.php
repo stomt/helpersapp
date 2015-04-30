@@ -16,9 +16,9 @@
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.0/jquery.mobile.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.0/jquery.mobile.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 
     <script src="/js/main.js"></script>
 
@@ -41,11 +41,14 @@
             <h4>Choose your region</h4>
             <select class="chooseCity">
                 <option>Please choose a region</option>
-                @foreach(City::all() as $city)
+                <?php
+                $regions = '';
+                foreach(App\Models\City::all() as $city){
 
-                    <option value="{{ $city->id }}"><a data-city="{{ $city->id }}">{{ $city->title }}</a></option>
-
-                @endforeach
+                    $regions .= '<option value="'.$city->id.'"><a data-city="'.$city->id.'">'.$city->title.'</a></option>';
+                }
+                    echo $regions;
+                ?>
             </select>
 
             <ul>
@@ -168,9 +171,15 @@
                     
                     <label for="select-choice-hours">Hours</label>
                     <select name="select-choice-hours" id="select-choice-hours" data-mini="true">
-                        @for ($i=0; $i < 23; ++$i)
-                            <option id="choice-hour-{{ $i }}"value="{{ $i }}">{{ $i }} h</option>
-                        @endfor
+                        <?php/*
+                            $hours = '';
+                        for ($i=0; $i < 23; ++$i){
+                            $hours.= '<option id="choice-hour-'.$i.'"value="'.$i.'">'.$i.' h</option>';
+                        }
+                        echo $hours;*/
+                        ?>
+                        <option id="choice-hour-0"value="0">0 h</option><option id="choice-hour-1"value="1">1 h</option><option id="choice-hour-2"value="2">2 h</option><option id="choice-hour-3"value="3">3 h</option><option id="choice-hour-4"value="4">4 h</option><option id="choice-hour-5"value="5">5 h</option><option id="choice-hour-6"value="6">6 h</option><option id="choice-hour-7"value="7">7 h</option><option id="choice-hour-8"value="8">8 h</option><option id="choice-hour-9"value="9">9 h</option><option id="choice-hour-10"value="10">10 h</option><option id="choice-hour-11"value="11">11 h</option><option id="choice-hour-12"value="12">12 h</option><option id="choice-hour-13"value="13">13 h</option><option id="choice-hour-14"value="14">14 h</option><option id="choice-hour-15"value="15">15 h</option><option id="choice-hour-16"value="16">16 h</option><option id="choice-hour-17"value="17">17 h</option><option id="choice-hour-18"value="18">18 h</option><option id="choice-hour-19"value="19">19 h</option><option id="choice-hour-20"value="20">20 h</option><option id="choice-hour-21"value="21">21 h</option><option id="choice-hour-22"value="22">22 h</option>
+
                     </select>
                 
                     <label for="select-choice-minutes">Minutes</label>

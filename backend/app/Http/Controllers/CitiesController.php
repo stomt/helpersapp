@@ -1,8 +1,9 @@
 <?php namespace App\Http\Controllers;
 
-use Symfony\Component\Console\Input;
+use Illuminate\Support\Facades\Input;
 use App\Models\City;
 use App\Models\User;
+
 
 class CitiesController extends BaseController {
 
