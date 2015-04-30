@@ -30,10 +30,11 @@ function setContent(content) {
   $("#helpRequests").html(content).trigger('create');
 }
 
-$(document).on("pagecontainerbeforeshow", function (e, ui) {
-  var activePage = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
+$(document)
+  .on("pagecontainerbeforeshow", function (e, ui) {
+  var page = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
 
-  if(activePage == 'home'){
+  if(page == 'home'){
     if(homeUsed == false){                                          // Page impression by home-button or adress-bar?
       $.ajax({                                                    // Get list if available locations
         url: baseUrl,
@@ -73,7 +74,7 @@ $(document).on("pagecontainerbeforeshow", function (e, ui) {
   }
 
 
-  if(activePage == 'searchHelp'){
+  if(page == 'searchHelp'){
     if(city == null){
       $.ajax({
         url: baseUrl,
@@ -121,7 +122,7 @@ $(document).on("pagecontainerbeforeshow", function (e, ui) {
     $('#select-choice-hours').selectmenu("refresh", true);
   }
 
-  if(activePage == 'helpdata'){
+  if(page == 'helpdata'){
     $('.city').html("Your overview");
 
 
@@ -135,7 +136,7 @@ $(document).on("pagecontainerbeforeshow", function (e, ui) {
     });
   }
 
-  if(activePage == 'offerHelp'){
+  if(page == 'offerHelp'){
     if(city==null) window.location = '/';
 
     setHeader(city);
@@ -152,12 +153,12 @@ $(document).on("pagecontainerbeforeshow", function (e, ui) {
     });
   }
 
-});
+})
 
-$(document).on("pagecontainershow", function (e, ui) {
-  var activePage = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
+.on("pagecontainershow", function (e, ui) {
+  var page = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
 
-  if (activePage == 'home') {
+  if (page == 'home') {
     $('.chooseCity')
       .on('change',function(e){
         e.preventDefault();
@@ -183,7 +184,7 @@ $(document).on("pagecontainershow", function (e, ui) {
       });
   }
 
-  if(activePage == 'searchHelp'){
+  if(page == 'searchHelp'){
     $('#createHelpRequest').on(tc,function(e){
       e.preventDefault();
       e.stopPropagation();
@@ -222,7 +223,7 @@ $(document).on("pagecontainershow", function (e, ui) {
     })
   }
 
-  if(activePage == 'helpdata'){
+  if(page == 'helpdata'){
     $(this)
       // JOIN/LEAVE Insertion
       .on(tc,'.help',function(e){
@@ -293,7 +294,7 @@ $(document).on("pagecontainershow", function (e, ui) {
   }
 
 
-  if(activePage == 'offerHelp'){
+  if(page == 'offerHelp'){
     $(this)
 
       // DELETE Insertion
@@ -363,22 +364,18 @@ $(document).on("pagecontainershow", function (e, ui) {
         }
       })
   }
-});
+})
 
-$(document)
-    .bind('pagecreate',function(){
-        $.ajaxSetup();
+.bind('pagecreate',function(){
+      $.ajaxSetup();
+      $.mobile.linkBindingEnabled = true;
+      $.mobile.ajaxEnabled = true;
 
-        $.mobile.linkBindingEnabled = true;
-        $.mobile.ajaxEnabled = true;
-        $.mobile.pageContainer = $("body").pagecontainer();
+      // Change to startpage and prevent ajax-call by setting homeUsed=true
+      $('a[data-icon="home"]').on(tc, function(){
+          homeUsed=true;
+        $.mobile.pageContainer.pagecontainer('change', '#home');
+      });
 
-        // Change to startpage and prevent ajax-call by setting homeUsed=true
-        $('a[data-icon="home"]').on(tc, function(){
-            homeUsed=true;
-          $.mobile.pageContainer.pagecontainer('change', '#home');
-          //$.mobile.pageContainer.pagecontainer("load",
-        });
-
-    });
+  });
 
