@@ -9,44 +9,53 @@
     <div class="time">
     Created {{ $insertion->created }} | {{ $insertion->howlong }}
     </div>
-    @if($insertion->number)
-        <div class="time">
-        Phone: {{ $insertion->number }}
-        </div>
-    @endif
+    <?php
+    if($insertion->number){
+       echo '<div class="time">
+        Phone: '.$insertion->number.'
+        </div>';
+    }
+    ?>
+
+
     <span class="bez">Notice:</span>
     <div class="notice">
         {{ $insertion->notice }}
     </div>
-    @if ($insertion->user_id == Session::get('user_id'))
-        <span data-mini="true" data-role="button" data-theme="e" class="delete" data-iid="{{ $insertion->id }}">Delete</span></li>
-    @else
-        <div data-role="controlgroup" data-type="horizontal">
-            
-            @if ($insertion->helpOffered > 0) 
+    <?php if($insertion->user_id == Session::get('user_id')){
+        echo '<button data-theme="e" class="delete" data-iid="'.$insertion->id.'">Delete</button></li>';
+    }else{
 
-                <select class="amountHelper" data-mini="true" data-inline="true" data-theme="e">
-                    @for ($i=1; $i <= $insertion->helpOffered; $i++) 
-                        <option value="{{ $i }}" {{ $insertion->helpOffered == $i ? " selected" : "" }}>
-                            {{ $i == 1 ? "I" : $i }}
-                        </option>
-                    @endfor
+    echo '<div data-role="controlgroup" data-type="horizontal">';
+
+            
+            if ($insertion->helpOffered > 0){
+
+                echo '<select class="amountHelper" data-mini="true" data-inline="true" data-theme="e">';
+                    for ($i=1; $i <= $insertion->helpOffered; $i++) {
+
+                        echo '<option value="'.$i.'" '.($insertion->helpOffered == $i ? " selected" : "" ).'>'.
+                            ($i == 1 ? "I" : $i).'</option>';
+                    }
+                ?>
                 </select>
                 <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="decreaseHelp" data-amount="{{ -$insertion->helpOffered }}" data-theme="e" data-iid="{{ $insertion->id }}">Revoke!</div>
 
-            @else
+           <?php } else { ?>
 
                 <select class="amountHelper" data-mini="true" data-inline="true">
-                    @for ($i=1; $i <= 30 && $i <= $insertion->helperRequested - $insertion->users()->sum('amount'); $i++) 
-                        <option value="{{ $i }}" {{ $insertion->helpOffered == $i ? " selected" : "" }}>
-                            {{ $i == 1 ? "I" : $i }}
-                        </option>
-                    @endfor
+
+                    <?php
+                    for ($i=1; $i <= 30 && $i <= $insertion->helperRequested - $insertion->users()->sum('amount'); $i++) {
+                        echo '<option value="'.$i.'" '.($insertion->helpOffered == $i ? " selected" : "").'>'.($i == 1 ? "I" : $i).'</option>';
+                    }
+                    ?>
                 </select>
+
                 <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="increaseHelp" data-amount="1" data-iid="{{ $insertion->id }}">will come!</div>
-
-            @endif
-
+            <?php
+            }
+            ?>
         </div>
-    @endif
+    <?php } ?>
 </li>

@@ -190,19 +190,19 @@ class InsertionsController extends BaseController {
             // Falls es jetzt früher ist es der Termin + 2 std und es noch heute ist
             $time = time();
             if ($time >= $from && $time <= ($from+1440000)  && date('Ymd') == date('Ymd', $from) ) {
-                return "Ab jetzt gebraucht!";
+                return "Needed immediately!!";
             } else {
                 $date = date('Y-m-d', $from);
                 $tomorrow = date('Y-m-d', strtotime('tomorrow'));
                 $day_after_tomorrow = date('Y-m-d', strtotime('tomorrow + 1 day'));
                 if ($date == date('Y-m-d')){
-                    return "Ab ".date('H:i',$from).' Uhr gebraucht!';
+                    return "Needed from ".date('H:i',$from).' o\'clock!';
                 } elseif ($date == $tomorrow) {
-                    return "Morgen ab ".date('H:i',$from).' Uhr gebraucht!';
+                    return "Tomorrow from ".date('H:i',$from).' o\'clock!';
                 } elseif ($date == $day_after_tomorrow) {
-                    return "Übermorgen ab ".date('H:i',$from).' Uhr gebraucht!';
+                    return "Overmorrow from ".date('H:i',$from).' o\'clock!';
                 } else {
-                    return "Ab ".date('d.m.Y H:i',$from).' Uhr gebraucht!';
+                    return "From ".date('d.m.Y H:i',$from).' o\'clock!';
                 }
             }
         }
@@ -214,8 +214,8 @@ class InsertionsController extends BaseController {
          * @return string
          */
         private static function niceTime($since){
-            $periods         = array("Sekunde", "Minute", "Stunde", "Tag", "Woche", "Monat", "Jahr", "decade");
-            $lengths         = array("60","60","24","7","4.35","12","10");
+            $periods         = ["Second", "Minute", "Hour", "Day", "Week", "Month", "Year", "decade"];
+            $lengths         = ["60","60","24","7","4.35","12","10"];
 
             $now             = time();
             $unix_date       = strtotime($since);
@@ -241,7 +241,7 @@ class InsertionsController extends BaseController {
             $difference = round($difference);
 
             if ($difference != 1) {
-                $periods[$j].= (array_key_exists($periods[$j],array('Tag','Monat','Jahr'))) ? 'en' : 'n';
+                $periods[$j].= (array_key_exists($periods[$j],['Day','Month','Year'])) ? 'en' : 'n';
             }
 
             return "$difference $periods[$j]";

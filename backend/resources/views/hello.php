@@ -191,7 +191,7 @@
                 <label for="notice">Notice (optional, max. 120 characters):</label>
                 <textarea name="notice" id="notice" data-mini="true" maxlength="120" ></textarea>
 
-                <span data-role="button" id="createHelpRequest" data-mini="true">Post</span>
+                <button id="createHelpRequest">Post</button>
             </form>
         </div>
     </div>
