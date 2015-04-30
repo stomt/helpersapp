@@ -52,7 +52,7 @@
                     ?>
                 </select>
 
-                <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="increaseHelp" data-amount="1" data-iid="{{ $insertion->id }}">will come!</div>
+                <button data-inline="true" data-mini="true" class="help" data-help="increaseHelp" data-amount="1" data-iid="{{ $insertion->id }}">will come!</button>
             <?php
             }
             ?>
