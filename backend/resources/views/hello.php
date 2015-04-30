@@ -148,7 +148,7 @@
                 <input type="text" name="address" id="address" data-mini="true" />
 
                 <label for="helperRequested">Amount of helpers neccessary:</label>
-                <input type="range" name="helperRequested" id="helperRequested" value="10" min="1" max="100" data-mini="true"/>
+                <input type="range" name="helperRequested" id="helperRequested" value="10" min="1" max="100"/>
 
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>When? (Day / Time):</legend>
