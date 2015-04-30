@@ -1,30 +1,17 @@
-<!doctype html>
-<html lang="en">
-<head>
+<!doctype html><html lang="en"><head>
     <meta charset="utf-8">
     <title>Helper-App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="description" content="HelpersApp.org - Get instant help">
-
     <!-- Styles -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
     <link rel="stylesheet" href="/css/main.css">
-
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
     <script src="/js/main.js"></script>
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../favicon.ico">
-</head>
-<body>
-
+</head><body>
     <div data-role="page" id="home">
         <div data-role="header" data-type="horizontal">
             <a href="http://www.stomt.com" data-icon="star">stomt.com</a>
@@ -195,5 +182,4 @@
             </form>
         </div>
     </div>
-</body>
-</html>
+</body></html>

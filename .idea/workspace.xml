@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d11fa51-af58-4b7e-9f48-a784996892f4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/resources/views/insertions/show.blade.php" afterPath="$PROJECT_DIR$/backend/resources/views/insertions/show.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/resources/views/hello.php" afterPath="$PROJECT_DIR$/backend/resources/views/hello.php" />
     </list>
     <ignored path="helperapp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,10 +59,10 @@
       <file leaf-file-name="hello.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/resources/views/hello.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.5454545" vertical-offset="0" max-vertical-offset="3468">
-              <caret line="5" column="102" selection-start-line="5" selection-start-column="100" selection-end-line="5" selection-end-column="102" />
+            <state vertical-scroll-proportion="-56.872726" vertical-offset="0" max-vertical-offset="3230">
+              <caret line="184" column="6" selection-start-line="184" selection-start-column="6" selection-end-line="184" selection-end-column="6" />
               <folding>
-                <element signature="e#6966#7229#0#PHP" expanded="true" />
+                <element signature="e#6408#6671#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,7 +71,7 @@
       <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/resources/views/insertions/show.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56962025" vertical-offset="648" max-vertical-offset="1122">
+            <state vertical-scroll-proportion="1.9367088" vertical-offset="0" max-vertical-offset="1122">
               <caret line="54" column="58" selection-start-line="54" selection-start-column="58" selection-end-line="54" selection-end-column="58" />
               <folding>
                 <marker date="1430434221339" expanded="true" signature="579:595" placeholder="..." />
@@ -139,9 +139,9 @@
         <option value="$PROJECT_DIR$/backend/app/Models/City.php" />
         <option value="$PROJECT_DIR$/backend/app/Models/Insertion.php" />
         <option value="$PROJECT_DIR$/backend/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/backend/resources/views/hello.php" />
         <option value="$PROJECT_DIR$/backend/app/Http/Controllers/InsertionsController.php" />
         <option value="$PROJECT_DIR$/backend/resources/views/insertions/show.blade.php" />
+        <option value="$PROJECT_DIR$/backend/resources/views/hello.php" />
       </list>
     </option>
   </component>
@@ -1035,14 +1035,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/resources/views/insertions/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="272">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/public/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.724138" vertical-offset="463" max-vertical-offset="6630">
@@ -1068,19 +1060,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/resources/views/insertions/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="272">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/resources/views/hello.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.5454545" vertical-offset="0" max-vertical-offset="3468">
-          <caret line="5" column="102" selection-start-line="5" selection-start-column="100" selection-end-line="5" selection-end-column="102" />
+        <state vertical-scroll-proportion="-56.872726" vertical-offset="0" max-vertical-offset="3230">
+          <caret line="184" column="6" selection-start-line="184" selection-start-column="6" selection-end-line="184" selection-end-column="6" />
           <folding>
-            <element signature="e#6966#7229#0#PHP" expanded="true" />
+            <element signature="e#6408#6671#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/resources/views/insertions/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56962025" vertical-offset="648" max-vertical-offset="1122">
+        <state vertical-scroll-proportion="1.9367088" vertical-offset="0" max-vertical-offset="1122">
           <caret line="54" column="58" selection-start-line="54" selection-start-column="58" selection-end-line="54" selection-end-column="58" />
           <folding>
             <marker date="1430434221339" expanded="true" signature="579:595" placeholder="..." />
