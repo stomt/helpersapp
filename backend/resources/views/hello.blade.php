@@ -7,16 +7,19 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="description" content="HelpersApp.org - Get instant help">
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <!-- Styles
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">-->
+    <link rel="stylesheet" media="all" type="text/css" href="/css/jquery.mobile-1.3.1.min.css" />
+    <link rel="stylesheet" href="/css/main.css">
 
     <!-- Scripts -->
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>-->
+    <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.mobile-1.3.1.min.js"></script>
 
-    <script type="text/javascript" src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
 
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../apple-touch-icon-144-precomposed.png">
@@ -29,7 +32,7 @@
 
     <div data-role="page" id="home">
         <div data-role="header" data-type="horizontal">
-            <a href="http://www.stomt.de" data-icon="star">stomt.com</a>
+            <a href="http://www.stomt.com" data-icon="star">stomt.com</a>
             <h1>Helpers-App</h1>
         </div><!-- /header -->
 
@@ -109,7 +112,7 @@
 
         <div data-role="content">
             <h2>Impressum</h2>
-            Created and offered by <a href="http://stomt.de">stomt</a>:<br>
+            Created and offered by <a href="http://stomt.com">stomt</a>:<br>
             Dr.-Hans-Kapfinger-Straße 12, Raum 112/113<br>
             94032 Passau, Germany<br>
             <a href="mailto:helpersapp@stomt.com">helpersapp@stomt.com</a>

@@ -35,7 +35,7 @@ $(document)
         }
 
         // Change to startpage and prevent ajax-call by setting homeUsed=true
-        $('a[data-icon="home"]').on(tc,function(){
+        $('a[data-icon="home"]').on(tc, function(){
             homeUsed=true;
             $.mobile.changePage($('#home'));
         });
