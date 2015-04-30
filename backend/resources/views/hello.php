@@ -1,16 +1,13 @@
 <!doctype html><html lang="en"><head>
-    <meta charset="utf-8">
-    <title>Helper-App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="description" content="HelpersApp.org - Get instant help">
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-    <script src="/js/main.js"></script>
+<meta charset="utf-8"><title>Helper-App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="description" content="HelpersApp.org - Get instant help">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+<link rel="stylesheet" href="/css/main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+<script src="/js/main.js"></script>
 </head><body>
     <div data-role="page" id="home">
         <div data-role="header" data-type="horizontal">
@@ -152,15 +149,7 @@
                     
                     <label for="select-choice-hours">Hours</label>
                     <select name="select-choice-hours" id="select-choice-hours" data-mini="true">
-                        <?php/*
-                            $hours = '';
-                        for ($i=0; $i < 23; ++$i){
-                            $hours.= '<option id="choice-hour-'.$i.'"value="'.$i.'">'.$i.' h</option>';
-                        }
-                        echo $hours;*/
-                        ?>
                         <option id="choice-hour-0"value="0">0 h</option><option id="choice-hour-1"value="1">1 h</option><option id="choice-hour-2"value="2">2 h</option><option id="choice-hour-3"value="3">3 h</option><option id="choice-hour-4"value="4">4 h</option><option id="choice-hour-5"value="5">5 h</option><option id="choice-hour-6"value="6">6 h</option><option id="choice-hour-7"value="7">7 h</option><option id="choice-hour-8"value="8">8 h</option><option id="choice-hour-9"value="9">9 h</option><option id="choice-hour-10"value="10">10 h</option><option id="choice-hour-11"value="11">11 h</option><option id="choice-hour-12"value="12">12 h</option><option id="choice-hour-13"value="13">13 h</option><option id="choice-hour-14"value="14">14 h</option><option id="choice-hour-15"value="15">15 h</option><option id="choice-hour-16"value="16">16 h</option><option id="choice-hour-17"value="17">17 h</option><option id="choice-hour-18"value="18">18 h</option><option id="choice-hour-19"value="19">19 h</option><option id="choice-hour-20"value="20">20 h</option><option id="choice-hour-21"value="21">21 h</option><option id="choice-hour-22"value="22">22 h</option>
-
                     </select>
                 
                     <label for="select-choice-minutes">Minutes</label>
