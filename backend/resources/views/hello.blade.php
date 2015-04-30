@@ -9,15 +9,15 @@
 
     <!-- Styles
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">-->
-    <link rel="stylesheet" media="all" type="text/css" href="/css/jquery.mobile-1.3.1.min.css" />
+    <link rel="stylesheet" media="all" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.3.1/jquery.mobile.min.css" />
     <link rel="stylesheet" href="/css/main.css">
 
     <!-- Scripts -->
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>-->
-    <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.mobile-1.3.1.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquerymobile/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquerymobile/jquerymobile/1.3.1/jquery.mobile.min.js"></script>
 
     <script src="/js/main.js"></script>
 
