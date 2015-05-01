@@ -20,6 +20,7 @@ class CreateInsertionsTable extends Migration {
             $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned();
 
+            $table->string('number');
             $table->string('address');
             $table->integer('helperRequested');
             $table->text('notice');
