@@ -11,7 +11,6 @@
 </head><body>
     <div data-role="page" id="home" data-dom-cache="true">
         <div data-role="header" data-type="horizontal">
-            <a href="http://www.stomt.com" data-icon="star">stomt.com</a>
             <h1>Helpers-App</h1>
         </div><!-- /header -->
 
@@ -98,12 +97,11 @@
             Dr.-Hans-Kapfinger-Straße 12, Raum 112/113<br>
             94032 Passau, Germany<br>
             <a href="mailto:helpersapp@stomt.com">helpersapp@stomt.com</a>
-            <p>SSL-License through<a href="https://www.aditsystems.de/">Anton Dollmaier</a></p>
         </div>
 
         <div data-role="footer" data-position="fixed">
-            <a href="http://stomt.com" title="stomt - Feedback">stomt</a>  v2.0.0 
-            <a href="#impressum" title="Impressum">Kontakt</a>
+            <a href="http://stomt.com" title="stomt - Feedback">By stomt</a>  v2.0.1
+            <a href="#impressum" title="Impressum">Contact</a>
         </div>
     </div>
 
