@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Input;
 use App\Models\City;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 
 class CitiesController extends BaseController {
@@ -28,9 +29,9 @@ class CitiesController extends BaseController {
     {
         $result["success"] = false;
 
-        if (User::live()->city_id !== null) {
+        if (User::live($this->city)->city_id !== null) {
             $result["success"] = true;
-            $result["city_id"] = User::live()->city_id;
+            $result["city_id"] = User::live($this->city)->city_id;
             $cities = [];
             foreach (City::all() as $city) {
                 $cities[$city->id] = $city->title;
@@ -49,12 +50,11 @@ class CitiesController extends BaseController {
     public function store()
     {
         $result["success"] = false;
-
-        if (Input::has('city_id')) {
-            $city = City::find(Input::get('city_id'));
-            if ($city) {
-                $user = User::live();
-                $user->city_id = $city->id;
+        $city_id = Input::has('city_id');
+        if ($city_id) {
+            $city = City::where('id',$city_id)->first();
+            if ($city !== null) {
+                $user = User::live($city_id);
                 $user->save();
                 return $this->index();
             }

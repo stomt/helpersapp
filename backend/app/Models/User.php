@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Session;
 
 class User extends Model {
 
-	public static function live()
+    public $fillable = ['city_id'];
+
+	public static function live($city_id)
 	{	
 		$user = null;
 
@@ -15,6 +17,7 @@ class User extends Model {
 		
 		if (!$user) {
 			$user = new User();
+            $user->city_id = $city_id;
 			$user->save();
 			Session::put('user_id', $user->id);
 		}

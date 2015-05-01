@@ -255,7 +255,7 @@ class InsertionsController extends BaseController {
          */
         private static function helpOffered($insertion)
         {
-            $user = $insertion->users()->where('user_id', User::live()->id)->first();
+            $user = $insertion->users()->where('user_id', User::live($insertion->city_id)->id)->first();
             if ($user) {
                 return $user->pivot->amount;
             } else {
