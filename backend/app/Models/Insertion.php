@@ -1,9 +1,11 @@
 <?php namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Insertion extends Model {
 
-	protected $softDelete = true;
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
 
     protected $guarded = array();
 
@@ -23,6 +25,10 @@ class Insertion extends Model {
     public function user($user_id)
     {
     	return $this->users()->where('user_id', $user_id)->first();
+    }
+
+    public function category(){
+        return $this->belongsTo('App\Models\Category');
     }
 
     public function creator()

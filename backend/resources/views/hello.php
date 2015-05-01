@@ -131,6 +131,18 @@
                 <label for="address">Address:</label>
                 <input type="text" name="address" id="address" data-mini="true" />
 
+                <label for="category">Category</label>
+                <select name="category" data-mini="true">
+                    <option>Please choose a category</option>
+                    <?php
+                    $categories = '';
+                    foreach(App\Models\Category::all() as $category){
+                        $categories .= '<option value="'.$category->id.'"><a data-city="'.$category->id.'">'.$category->categoryname.'</a></option>';
+                    }
+                    echo $categories;
+                    ?>
+                </select>
+
                 <label for="helperRequested">Amount of helpers neccessary:</label>
                 <input type="range" name="helperRequested" id="helperRequested" value="10" min="1" max="100"/>
 

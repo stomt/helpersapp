@@ -35,7 +35,7 @@ class InsertionsController extends BaseController {
 
         $city = City::find($city_id);
         if ($city) {
-            $user = User::live();
+            $user = User::live(Session::get('city_id'));
             $insertions = $city->currentInsertions();
 
             $result["success"] = true;
@@ -58,30 +58,28 @@ class InsertionsController extends BaseController {
 
         $city = City::find($city_id);
         if ($city) {
-            $input = Input::only('address', 'helperRequested', 'notice', 'select-choice-day', 'select-choice-hours', 'select-choice-minutes', 'number');
-            $validation = Validator::make($input, Insertion::$rules);
-            if ($validation->passes()) {
-                $insertion = new Insertion();
-                $insertion->user_id = Session::get('user_id');
-                $insertion->city_id = $city->id;
-                
-                $insertion->address = $input['address'];
-                $insertion->helperRequested = $input['helperRequested'];
-                $insertion->number = $input['number'];
-                $insertion->notice = $input['notice'];
+            $input = Input::only('address', 'helperRequested', 'notice', 'category', 'select-choice-day', 'select-choice-hours', 'select-choice-minutes', 'number');
+            $insertion = new Insertion();
+            $insertion->user_id = Session::get('user_id');
+            $insertion->city_id = $city->id;
+            $insertion->category_id = $input['category'];
 
-                $date = mktime(
-                    $input['select-choice-hours'], 
-                    $input['select-choice-minutes'], 
-                    0,
-                    date("m"),
-                    date("d")+$input['select-choice-day'],
-                    date("Y"));
-                $insertion->howlong = date('Y-m-d H:i:s', $date);
-                
-                if ($insertion->save()) {
-                    $result["success"] = true;
-                }
+            $insertion->address = $input['address'];
+            $insertion->helperRequested = $input['helperRequested'];
+            $insertion->number = $input['number'];
+            $insertion->notice = $input['notice'];
+
+            $date = mktime(
+                $input['select-choice-hours'],
+                $input['select-choice-minutes'],
+                0,
+                date("m"),
+                date("d")+$input['select-choice-day'],
+                date("Y"));
+            $insertion->howlong = date('Y-m-d H:i:s', $date);
+
+            if ($insertion->save()) {
+                $result["success"] = true;
             }
         }
         return response()->json($result);
@@ -134,7 +132,7 @@ class InsertionsController extends BaseController {
     {
         $result["success"] = false;
 
-        $user = User::live();
+        $user = User::live(Session::has('city_id'));
         $insertions = Insertion::with('users')->get()->filter(function($insertion) use ($user)
         {
             if ($insertion->user_id == $user->id || $insertion->users()->where('user_id', $user->id)->first()) {

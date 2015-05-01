@@ -3,6 +3,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class City extends Model {
 
@@ -17,7 +18,7 @@ class City extends Model {
 
     public function currentInsertions()
     {
-    	$user = User::live();
+    	$user = User::live(Session::get('city_id'));
     	return $this->insertions()->with('users')->get()->filter(function($insertion) use ($user)
             {
                 $from = strtotime($insertion->howlong);

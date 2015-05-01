@@ -133,34 +133,7 @@ $(document)
   }
 
   if(page == 'helpdata'){
-    $('.city').html("Your overview");
 
-    $.ajax({
-      url: baseUrl+"/myhelp",
-      context: this
-    }).success(function(data) {
-      if (data.success) {
-        $("#helpDataReq").html(data.html).trigger('create');
-      }
-    });
-  }
-
-  if(page == 'offerHelp'){
-
-    if(city==null) window.location = '/';
-console.log(city)
-    setHeader(city);
-    // change content immediately
-    $.ajax({
-      url: baseUrl+"/" + city + "/insertions",
-      context: this
-    }).done(function(data) {
-      if (data.success) {
-        setContent(data.html);
-      } else {
-        //alert('ERROR: TODO')
-      }
-    });
   }
 
 })
@@ -233,6 +206,17 @@ console.log(city)
   }
 
   if(page == 'helpdata'){
+    $('.city').html("Your overview");
+
+    $.ajax({
+      url: baseUrl+"/myhelp",
+      context: this
+    }).success(function(data) {
+      if (data.success) {
+        $("#helpDataReq").html(data.html).trigger('create');
+      }
+    });
+
     $(this)
       // JOIN/LEAVE Insertion
       .on(tc,'.help',function(e){
@@ -304,6 +288,21 @@ console.log(city)
 
 
   if(page == 'offerHelp'){
+    if(city==null) window.location = '/';
+
+    setHeader(city);
+    // change content immediately
+    $.ajax({
+      url: baseUrl+"/" + city + "/insertions",
+      context: this
+    }).done(function(data) {
+      if (data.success) {
+        setContent(data.html);
+      } else {
+        //alert('ERROR: TODO')
+      }
+    });
+
     $(this)
 
       // DELETE Insertion

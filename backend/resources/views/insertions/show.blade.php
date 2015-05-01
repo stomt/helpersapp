@@ -1,7 +1,7 @@
 
 <li {{ $insertion->helpOffered > 0 ? 'data-theme="e"' : '' }}>
     <h6>
-        <span class="a">{{ $insertion->users()->sum('amount') ? $insertion->users()->sum('amount') : 0 }} / {{ $insertion->helperRequested }}</span> Helpers confirmed
+        <span class="a">{{ $insertion->users()->sum('amount') ? $insertion->users()->sum('amount') : 0 }} / {{ $insertion->helperRequested }}</span> Helpers confirmed | {{$insertion->category->categoryname}}
     </h6>
     <div class="address">
         Address: {{ $insertion->address }} <a href="https://maps.google.com/?q={{ $insertion->address }}">(Google Maps)</a>
@@ -23,7 +23,7 @@
         {{ $insertion->notice }}
     </div>
     <?php if($insertion->user_id == Session::get('user_id')){
-        echo '<button data-theme="e" class="delete" data-iid="'.$insertion->id.'">Delete</button></li>';
+        echo '<button data-theme="e" class="delete" data-mini="true" data-iid="'.$insertion->id.'">Delete</button></li>';
     }else{
 
     echo '<div data-role="controlgroup" data-type="horizontal">';
