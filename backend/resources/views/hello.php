@@ -29,6 +29,7 @@
             </select>
 
             <ul>
+                <li>Help the people in Nepal</li>
                 <li>no registration needed</li>
                 <li>help fast & coordinated</li>
                 <li>get instant help</li>

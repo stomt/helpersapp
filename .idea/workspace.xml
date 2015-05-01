@@ -30,8 +30,8 @@
       <file leaf-file-name="hello.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/resources/views/hello.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40304708" vertical-offset="270" max-vertical-offset="3179">
-              <caret line="33" column="39" selection-start-line="33" selection-start-column="39" selection-end-line="33" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.3559557" vertical-offset="270" max-vertical-offset="3196">
+              <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -1074,8 +1074,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/resources/views/hello.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40304708" vertical-offset="270" max-vertical-offset="3179">
-          <caret line="33" column="39" selection-start-line="33" selection-start-column="39" selection-end-line="33" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.3559557" vertical-offset="270" max-vertical-offset="3196">
+          <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
           <folding />
         </state>
       </provider>
