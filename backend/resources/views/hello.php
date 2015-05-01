@@ -30,11 +30,9 @@
 
             <ul>
                 <li>no registration needed</li>
-                <li>help fast</li>
-                <li>help coordinated</li>
+                <li>help fast & coordinated</li>
                 <li>get instant help</li>
                 <li>#helpersapp</li>
-                <li>Feedback: <a href="mailto:helpersapp@stomt.com">helpersapp@stomt.com</a></li>
             </ul>
         </div><!-- /content -->
 
