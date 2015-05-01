@@ -13,8 +13,8 @@ h4{text-align:center;margin-left:auto;margin-right:auto;}
         width: 520px !important;
         margin: 0 auto !important;
         position: relative !important;
-        border-right: 1px #666 outset !important;
-        border-left: 1px #666 outset !important;
+        border: 1px #ddd outset !important;
+        outline-color:#ddd !important;
     }
     .ui-footer {
         width: 520px !important;
@@ -29,9 +29,9 @@ h4{text-align:center;margin-left:auto;margin-right:auto;}
 .datetime :last-child{float:right}
 /*.help{float:left;margin-top:0px;}*/
 .help::after{
-    width: 80%;
-    float: right;
-    margin-top: 0px;
+width: 80%;
+float: right;
+margin-top: 0px;
 }
 .helperRequested{float:left}
 [data-role="footer"]{text-align:center;}
