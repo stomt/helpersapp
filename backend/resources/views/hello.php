@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <script src="/js/main.js"></script>
 </head><body>
-    <div data-role="page" id="home">
+    <div data-role="page" id="home" data-dom-cache="true">
         <div data-role="header" data-type="horizontal">
             <a href="http://www.stomt.com" data-icon="star">stomt.com</a>
             <h1>Helpers-App</h1>
@@ -55,8 +55,8 @@
 
         <div data-role="navbar">
             <ul>
-                <li><a href="#offerHelp" data-show="offerHelp">Offer Help</a></li>
-                <li><a href="#searchHelp" data-show="searchHelp">Need Help</a></li>
+                <li><a href="#offerHelp">Offer Help</a></li>
+                <li><a href="#searchHelp">Need Help</a></li>
             </ul>
         </div><!-- /navbar -->
 
@@ -65,7 +65,7 @@
 
 
 
-    <div data-role="page" id="offerHelp">
+    <div data-role="page" id="offerHelp" data-dom-cache="true">
         <div data-role="header">
             <a href="#home" data-icon="home">Home</a>
             <h1 class="city"></h1>
@@ -74,8 +74,8 @@
 
         <div data-role="navbar">
             <ul>
-                <li><a href="#offerHelp" data-show="offerHelp" class="ui-btn-active ui-state-persist">Offer Help</a></li>
-                <li><a href="#searchHelp" data-show="searchHelp">Need Help</a></li>
+                <li><a href="#offerHelp" class="ui-btn-active ui-state-persist">Offer Help</a></li>
+                <li><a href="#searchHelp">Need Help</a></li>
             </ul>
         </div>
 
@@ -85,7 +85,7 @@
 
 
 
-    <div data-role="page" id="impressum">
+    <div data-role="page" id="impressum" data-dom-cache="true">
         <div data-role="header">
             <a href="#home" data-icon="home">Home</a>
             <h1>Impressum</h1>
@@ -109,7 +109,7 @@
 
 
 
-    <div data-role="page" id="searchHelp">
+    <div data-role="page" id="searchHelp" data-dom-cache="true">
         <div data-role="header">
             <a href="#home" data-icon="home">Home</a>
             <h1 class="city"></h1>
@@ -118,8 +118,8 @@
 
         <div data-role="navbar">
             <ul>
-                <li><a href="#offerHelp" data-show="offerHelp">Offer Help</a></li>
-                <li><a href="#searchHelp" data-show="searchHelp" class="ui-btn-active ui-state-persist">Need Help</a></li>
+                <li><a href="#offerHelp">Offer Help</a></li>
+                <li><a href="#searchHelp" class="ui-btn-active ui-state-persist">Need Help</a></li>
             </ul>
         </div>
 

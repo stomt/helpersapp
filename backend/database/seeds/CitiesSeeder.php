@@ -9,24 +9,28 @@ class CitiesSeeder extends Seeder {
     {
         // cleanup
         DB::table('cities')->delete();
-        
-        // new data
-        $cities = array(
-        	array('id' =>  1, 'title' => 'Boizenburg'),
-            array('id' =>  2, 'title' => 'Deggendorf'),
-            array('id' =>  3, 'title' => 'Dresden'),
-            array('id' =>  4, 'title' => 'Dömitz'),
-            array('id' =>  5, 'title' => 'Gera'),
-            array('id' =>  6, 'title' => 'Landshut'),
-            array('id' =>  7, 'title' => 'Fischbeck'),
-            array('id' =>  8, 'title' => 'Freising'),
-            array('id' =>  9, 'title' => 'Magdeburg'),
-            array('id' => 10, 'title' => 'Passau'),
-            array('id' => 11, 'title' => 'Rosenheim')
-        );
+
+        $list="Bihar, Uttar Pradesh, West Bengal, Delhi/NCR, Assam, Uttarakhand, Andhra Pradesh,
+        Odisha, Gujarat, Sikkim, Karnataka, Kochi, Kerala
+        Patna district, Samastipur, Bhagalpur districts, Bhita, Supual, Darbhanga, Muzaffarpur, Gopalganj,
+        Kanpur, lucknow, allahabad, Agra, Varanashi, Jhansi, Sonebhadra, Gorakhpur,
+        Kolkata, Lake Town, Salt Lake, Dalhousie, Darjeeling/Siliguri, Park street area,
+        Telipara, Purulia, Bankura, Burdwan, East Midnapore, Nadia district,
+        New Delhi, Noida, Chandigarh, Jaipur, Barmer, Dumka, Pakur, Sahibganj, rishikesh, Ahmedabad,
+        Ranchi, Jamshedpur, Bhubaneswar, Visakhapatnam, Srikakulam, East Godavari districts, Kochi, Nagpur,
+        Jabalpur, Jafar Nagar, Jaripatka, Bhopal, Gwalior, Mandla, Hoshangabad, Sidhi, Indore, Chhindwara, Shahdol
+
+        ";
+
+        $cities = explode(',',$list);
+        $finalCities = [];
+        foreach($cities as $key => $value){
+            $finalCities[] = [ 'title' => trim($value), 'project_id' => 1];
+        }
+
 
         // insert
-        DB::table('cities')->insert($cities);
+        DB::table('cities')->insert($finalCities);
     }
 
 }

@@ -16,9 +16,11 @@ class CreateUsersTable extends Migration {
 		{
 			$table->increments('id');
 			
-			$table->integer('city_id');
+			$table->integer('city_id')->unsigned();
 
 			$table->timestamps();
+
+            $table->foreign('city_id')->references('id')->on('cities');
 		});
 	}
 
