@@ -46,7 +46,7 @@
                 <select class="amountHelper" data-mini="true" data-inline="true">
 
                     <?php
-                    for ($i=1; $i <= 30 && $i <= $insertion->helperRequested - $insertion->users()->sum('amount'); $i++) {
+                    for ($i=1; $i <= $insertion->helperRequested - $insertion->users()->sum('amount'); $i++) {
                         echo '<option value="'.$i.'" '.($insertion->helpOffered == $i ? " selected" : "").'>'.($i == 1 ? "I" : $i).'</option>';
                     }
                     ?>

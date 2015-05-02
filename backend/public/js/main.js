@@ -1,9 +1,14 @@
 var city    = null,
-    cities  = ['Bhaktapur','Dhading','Dolakha','Gorkha','Kathmandu','Kavre','Lalitpur','Lamjung','Ramechhap','Rasuwa'],
+    cities  = ['','Bhaktapur','Dhading','Dolakha','Gorkha','Kathmandu','Kavre','Lalitpur','Lamjung','Ramechhap','Rasuwa'],
     baseUrl = '//'+document.location.hostname+':'+location.port+'/cities',
-    tc      = 'tap', // tap or click?
-    homeUsed = false
-    ;
+    tc      = 'tap'; // tap or click?
+
+function stopBubble(e){
+  e.preventDefault()
+  e.stopPropagation()
+  e.stopImmediatePropagation();
+}
+
 function IsValidAmount(value){
     if(value.length==0)
         return false;
@@ -54,52 +59,16 @@ function setContent(content) {
   $("#helpRequests").html(content).trigger('create');
 }
 function getCity(){
-  return readCookie('city');
+  return city || readCookie('city');
 }
-function setCity(city){
-  if(!city){
-    city = getCity();
-  }
+function setCity(city_id){
+  city = city_id;
+  createCookie('city', city_id, 60);
 }
 $(document)
   .on("pagebeforecreate", function (e, ui) {
 
   var page = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
-
-  if(page == 'home'){
-    if(homeUsed == false){                                        // Page impression by home-button or adress-bar?
-      $.ajax({                                                    // Get list if available locations
-        url: baseUrl, context: this, dataType: 'json'
-      })
-      .success(function(data) {
-        if (data.success) {
-
-          var hash = window.location.hash,                // Get Hash-URI
-            hCity = hash.substr(1,hash.length),         // Remove the #
-            index = false;
-
-          if(hCity!=undefined && hCity !=''){
-            $.each( cities, function( key, value ) {    // Validate URIs location and change to location if possible
-              if(value == hCity){
-                city = key;
-                $.mobile.pageContainer.pagecontainer('change','#offerHelp');
-              }
-            });
-          }else{
-            if(city == null){
-              city = data.city_id;
-            }
-
-            setHeader(city);
-            $.mobile.pageContainer.pagecontainer('change','#offerHelp');
-          }
-        }
-      });
-    }else{
-      // The home-button has been used, reset to false to prevent the ajax-call above
-      homeUsed = false;
-    }
-  }
 
   if(page == 'searchHelp'){
     if(city == null){
@@ -148,45 +117,39 @@ $(document)
     $('#choice-hour-' + hour).attr('selected', true);
     $('#select-choice-hours').selectmenu("refresh", true);
   }
-
-    if(page == 'offerHelp'){
-      alert(serverSideCity);
-    }
 })
+
+
 
 .on("pagecontainertransition", function (e, ui) {
   var page = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
 
-  if (page == 'home') {
-    $('.chooseCity')
-      .on('change',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
+    if(page == 'home'){
+      $(document)
+        .on('change','.chooseCity', function(e){
+          stopBubble(e);
+          setCity($(this).val());
+          $.ajax({
+            type: 'post',
+            url: baseUrl,
+            context: this,
+            data: {
+              "city_id" : city
+            }
+          }).success(function(data) {
+            if (data.success) {
+              createCookie('city', city, 60);
+              $.mobile.changePage('#offerHelp');
+            }
+          });
 
-        city = $(this).val();
 
-        $.ajax({
-          type: 'post',
-          url: baseUrl,
-          context: this,
-          data: {
-            "city_id" : city
-          }
-        }).success(function(data) {
-          if (data.success) {
-            createCookie('city', city, 60);
-            $.mobile.pageContainer.pagecontainer('change','#offerHelp');
-          }
         });
-      });
-  }
+    }
 
   if(page == 'searchHelp'){
     $('#createHelpRequest').on(tc,function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
+      stopBubble(e);
 
       // Validate Input
       if(IsValidAmount($('#helperRequested').val()) == false){
@@ -236,9 +199,7 @@ $(document)
     $(this)
       // JOIN/LEAVE Insertion
       .on(tc,'.help',function(e){
-        e.preventDefault()
-        e.stopPropagation()
-        e.stopImmediatePropagation();
+        stopBubble(e);
 
         // set changeing state
         $(this)
@@ -265,9 +226,7 @@ $(document)
 
       // STORE amountHelper in submitbutton
       .on('change','.amountHelper',function(e){
-        e.preventDefault()
-        e.stopPropagation()
-        e.stopImmediatePropagation();
+        stopBubble(e);
 
         var amount = parseInt($('select.amountHelper option:selected').val());
         var button = $(this).parent().parent().parent().find('.help');
@@ -283,9 +242,7 @@ $(document)
 
       // DELETE Insertion
       .on(tc,'.delete',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
+        stopBubble(e);
 
         $.ajax({
           type: 'delete',
@@ -304,11 +261,8 @@ $(document)
 
 
   if(page == 'offerHelp'){
-    if(city==null) city = getCity();
-    if(city==null) window.location = '/';
-    console.log(city);
+    city = getCity();
     setHeader(city);
-
     // change content immediately
     $.ajax({
       url: baseUrl+"/" + city + "/insertions",
@@ -325,9 +279,7 @@ $(document)
 
       // DELETE Insertion
       .on(tc,'.delete',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
+        stopBubble(e);
 
         $.ajax({
           type: 'delete',
@@ -345,9 +297,7 @@ $(document)
 
       // JOIN/LEAVE Insertion
       .on(tc,'.help',function(e){
-        e.preventDefault()
-        e.stopPropagation()
-        e.stopImmediatePropagation();
+        stopBubble(e);
 
         // set changeingstate
         $(this)
@@ -374,9 +324,7 @@ $(document)
 
       // STORE amountHelper in submitbutton
       .on('change','.amountHelper',function(e){
-        e.preventDefault()
-        e.stopPropagation()
-        e.stopImmediatePropagation();
+        stopBubble(e);
 
         var amount = parseInt($('select.amountHelper option:selected').val());
         var button = $(this).parent().parent().parent().find('.help');
@@ -393,15 +341,16 @@ $(document)
 })
 
 .bind('pagecreate',function(){
-      $.ajaxSetup();
-      $.mobile.linkBindingEnabled = true;
-      $.mobile.ajaxEnabled = true;
-
       // change to startpage and prevent ajax-call by setting homeUsed=true
-      $('a[data-icon="home"]').on(tc, function(){
-          homeUsed=true;
-        $.mobile.pageContainer.pagecontainer('change', '#home');
-      });
-
-  });
+    $(document).on(tc, 'a[data-icon="home"]', function(e){
+      stopBubble(e);
+      $.mobile.pageContainer.pagecontainer('change', '#home');
+    });
+  })
+.one("mobileinit", function () {
+$.ajaxSetup();
+$.mobile.linkBindingEnabled = true;
+$.mobile.ajaxEnabled = true;
+$.fx.off = true;
+});;
 

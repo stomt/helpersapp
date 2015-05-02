@@ -22,7 +22,7 @@ class CitiesSeeder extends Seeder {
 
         ";
         //Only Nepal
-        $cities = ['Bhaktapur','Dhading','Dolakha','Gorkha','Kathmandu','Kavre','Lalitpur','Lamjung','Ramechhap','Rasuwa'];
+        $cities =   ['Bhaktapur','Dhading','Dolakha','Gorkha','Kathmandu','Kavre','Lalitpur','Lamjung','Ramechhap','Rasuwa'];
 
         $finalCities = [];
         foreach($cities as $key => $value){

@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use App\Models\City;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
@@ -45,14 +45,17 @@ class CitiesController extends BaseController {
     public function store()
     {
         $result["success"] = false;
-        $city_id = Input::has('city_id');
-        if ($city_id) {
-            $city = City::where('id',$city_id)->first();
-            if ($city !== null) {
-                $user = User::live($city_id);
-                $user->save();
-                return $this->index();
-            }
+
+        if(! Request::has('city_id') ){
+            abort(400, 'CitiesController needs a city_id for storing');
+        }
+
+        $city_id = Request::input('city_id');
+        $city = City::where('id',$city_id)->first();
+        if ($city !== null) {
+            $result["success"] = true;
+            User::live();
+            return $this->index();
         }
         
         return response()->json($result);

@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use App\Models\City;
 use App\Models\User;
 use App\Models\Insertion;
@@ -58,7 +58,7 @@ class InsertionsController extends BaseController {
 
         $city = City::find($city_id);
         if ($city) {
-            $input = Input::only('address', 'helperRequested', 'notice', 'category', 'select-choice-day', 'select-choice-hours', 'select-choice-minutes', 'number');
+            $input = Request::only('address', 'helperRequested', 'notice', 'category', 'select-choice-day', 'select-choice-hours', 'select-choice-minutes', 'number');
             $insertion = new Insertion();
             $insertion->user_id = Session::get('user_id');
             $insertion->city_id = $city->id;

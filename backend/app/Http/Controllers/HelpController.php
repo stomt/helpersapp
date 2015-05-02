@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\City;
 use App\Models\User;
@@ -23,7 +23,7 @@ class HelpController extends BaseController {
         if ($city && $insertion) {
 
             $user = $insertion->user(User::live()->id);
-            $amount = Input::get('amount');
+            $amount = Request::input('amount');
 
             // store new entry
             if (!$user && $amount > 0) {
