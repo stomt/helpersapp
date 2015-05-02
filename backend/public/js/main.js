@@ -132,10 +132,6 @@ $(document)
     $('#select-choice-hours').selectmenu("refresh", true);
   }
 
-  if(page == 'helpdata'){
-
-  }
-
 })
 
 .on("pagecontainertransition", function (e, ui) {
@@ -143,7 +139,6 @@ $(document)
 
   if (page == 'home') {
     $('.chooseCity')
-      .off('change')
       .on('change',function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -160,7 +155,7 @@ $(document)
           }
         }).success(function(data) {
           if (data.success) {
-            $.mobile.pageContainer.pagecontainer('load','#offerHelp');
+            $.mobile.pageContainer.pagecontainer('change','#offerHelp');
           }
         });
       });
@@ -195,7 +190,7 @@ $(document)
         // if (recieved == false) {
         //     recieved = true;
         if (data.success){
-          $.mobile.pageContainer.pagecontainer('load','#offerHelp');
+          $.mobile.pageContainer.pagecontainer('change','#offerHelp');
         } else {
           alert("Something failed.");
         }

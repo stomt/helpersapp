@@ -9,7 +9,7 @@ class CitiesSeeder extends Seeder {
     {
         // cleanup
         DB::table('cities')->delete();
-
+        // India
         $list="Bihar, Uttar Pradesh, West Bengal, Delhi/NCR, Assam, Uttarakhand, Andhra Pradesh,
         Odisha, Gujarat, Sikkim, Karnataka, Kochi, Kerala
         Patna district, Samastipur, Bhagalpur districts, Bhita, Supual, Darbhanga, Muzaffarpur, Gopalganj,
@@ -21,6 +21,8 @@ class CitiesSeeder extends Seeder {
         Jabalpur, Jafar Nagar, Jaripatka, Bhopal, Gwalior, Mandla, Hoshangabad, Sidhi, Indore, Chhindwara, Shahdol
 
         ";
+        //Only Nepal
+        $list = "Rasuwa, Kathmandu, Bhaktapur, Lalitpur, Dhading, Lamjung, Gorkha, Dolakha, Ramechhap, Kavre";
 
         $cities = explode(',',$list);
         $finalCities = [];
