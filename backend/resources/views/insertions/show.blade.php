@@ -39,7 +39,7 @@
                     }
                 ?>
                 </select>
-                <div data-mini="true" data-inline="true" data-role="button" class="help" data-help="decreaseHelp" data-amount="{{ -$insertion->helpOffered }}" data-theme="e" data-iid="{{ $insertion->id }}">Revoke!</div>
+                <span data-mini="true" data-inline="true" data-role="button" class="help" data-help="decreaseHelp" data-amount="{{ -$insertion->helpOffered }}" data-theme="e" data-iid="{{ $insertion->id }}">Revoke!</span>
 
            <?php } else { ?>
 

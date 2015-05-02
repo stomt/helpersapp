@@ -7,8 +7,9 @@ class User extends Model {
 
     public $fillable = ['city_id'];
 
-	public static function live($city_id)
-	{	
+	public static function live($city_id = 0 )
+	{
+        if($city_id == 0) $city_id = Session::get('city_id');
 		$user = null;
 
 		if (Session::has('user_id')) {

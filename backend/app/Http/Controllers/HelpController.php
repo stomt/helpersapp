@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 use App\Models\City;
 use App\Models\User;
 use App\Models\Insertion;

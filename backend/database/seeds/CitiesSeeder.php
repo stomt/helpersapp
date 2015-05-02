@@ -22,9 +22,8 @@ class CitiesSeeder extends Seeder {
 
         ";
         //Only Nepal
-        $list = "Rasuwa, Kathmandu, Bhaktapur, Lalitpur, Dhading, Lamjung, Gorkha, Dolakha, Ramechhap, Kavre";
+        $cities = ['Bhaktapur','Dhading','Dolakha','Gorkha','Kathmandu','Kavre','Lalitpur','Lamjung','Ramechhap','Rasuwa'];
 
-        $cities = explode(',',$list);
         $finalCities = [];
         foreach($cities as $key => $value){
             $finalCities[] = [ 'title' => trim($value), 'project_id' => 1];

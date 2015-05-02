@@ -1,22 +1,9 @@
 var city    = null,
-    cities  = null,
+    cities  = ['Bhaktapur','Dhading','Dolakha','Gorkha','Kathmandu','Kavre','Lalitpur','Lamjung','Ramechhap','Rasuwa'],
     baseUrl = '//'+document.location.hostname+':'+location.port+'/cities',
     tc      = 'tap', // tap or click?
     homeUsed = false
     ;
-function getUrlParam(sParam)
-{
-  var sPageURL = window.location.search.substring(1);
-  var sURLVariables = sPageURL.split('&');
-  for (var i = 0; i < sURLVariables.length; i++)
-  {
-    var sParameterName = sURLVariables[i].split('=');
-    if (sParameterName[0] == sParam)
-    {
-      return sParameterName[1];
-    }
-  }
-}
 function IsValidAmount(value){
     if(value.length==0)
         return false;
@@ -37,11 +24,43 @@ function setHeader(city) {
     $('.city').html("Overview");
   }
 }
+function createCookie(name, value, days) {
+  var expires;
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days * 86400000)); // 24 * 60 * 60 * 1000
+    expires = "; expires=" + date.toGMTString();
+  } else {
+    expires = "";
+  }
+  document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+}
 
+function readCookie(name) {
+  var nameEQ = encodeURIComponent(name) + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+  }
+  return null;
+}
+
+function eraseCookie(name) {
+  createCookie(name, "", -1);
+}
 function setContent(content) {
   $("#helpRequests").html(content).trigger('create');
 }
-
+function getCity(){
+  return readCookie('city');
+}
+function setCity(city){
+  if(!city){
+    city = getCity();
+  }
+}
 $(document)
   .on("pagebeforecreate", function (e, ui) {
 
@@ -54,7 +73,6 @@ $(document)
       })
       .success(function(data) {
         if (data.success) {
-          cities = data.cities;                           // Set available locations
 
           var hash = window.location.hash,                // Get Hash-URI
             hCity = hash.substr(1,hash.length),         // Remove the #
@@ -91,7 +109,6 @@ $(document)
       }).success(function(data) {
         if (data.success) {
           city = data.city_id;
-          cities = data.cities;
           setHeader(city);
         } else {
           alert("shit 1")
@@ -132,6 +149,9 @@ $(document)
     $('#select-choice-hours').selectmenu("refresh", true);
   }
 
+    if(page == 'offerHelp'){
+      alert(serverSideCity);
+    }
 })
 
 .on("pagecontainertransition", function (e, ui) {
@@ -155,6 +175,7 @@ $(document)
           }
         }).success(function(data) {
           if (data.success) {
+            createCookie('city', city, 60);
             $.mobile.pageContainer.pagecontainer('change','#offerHelp');
           }
         });
@@ -283,9 +304,11 @@ $(document)
 
 
   if(page == 'offerHelp'){
+    if(city==null) city = getCity();
     if(city==null) window.location = '/';
-
+    console.log(city);
     setHeader(city);
+
     // change content immediately
     $.ajax({
       url: baseUrl+"/" + city + "/insertions",
@@ -377,7 +400,7 @@ $(document)
       // change to startpage and prevent ajax-call by setting homeUsed=true
       $('a[data-icon="home"]').on(tc, function(){
           homeUsed=true;
-        $.mobile.pageContainer.pagecontainer('load', '#home');
+        $.mobile.pageContainer.pagecontainer('change', '#home');
       });
 
   });

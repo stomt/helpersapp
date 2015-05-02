@@ -29,14 +29,9 @@ class CitiesController extends BaseController {
     {
         $result["success"] = false;
 
-        if (User::live($this->city)->city_id !== null) {
+        if (User::live()->city_id !== null) {
             $result["success"] = true;
-            $result["city_id"] = User::live($this->city)->city_id;
-            $cities = [];
-            foreach (City::all() as $city) {
-                $cities[$city->id] = $city->title;
-            }
-            $result["cities"] = $cities;
+            $result["city_id"] = User::live()->city_id;
         }
 
     	return response()->json($result);

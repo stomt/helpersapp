@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head>
-<meta charset="utf-8"><title>Helper-App</title>
+<meta charset="utf-8"><title>Helpers-App: Nepal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="description" content="HelpersApp.org - Get instant help">
@@ -11,20 +11,20 @@
 </head><body>
     <div data-role="page" id="home" data-dom-cache="true">
         <div data-role="header" data-type="horizontal">
-            <h1>Helpers-App</h1>
+            <h1>Helpers-App: Nepal</h1>
         </div><!-- /header -->
 
         <div data-role="content">
-            <h4>Choose your region</h4>
+            <h4>Choose your district</h4>
             <select class="chooseCity">
-                <option>Please choose a region</option>
+                <option>Please choose a district</option>
                 <?php
                 $regions = '';
-                foreach(App\Models\City::all() as $city){
-
+                $cities = App\Models\City::all();
+                foreach($cities as $city){
                     $regions .= '<option value="'.$city->id.'"><a data-city="'.$city->id.'">'.$city->title.'</a></option>';
                 }
-                    echo $regions;
+                echo $regions;
                 ?>
             </select>
 

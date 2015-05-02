@@ -18,7 +18,7 @@ class City extends Model {
 
     public function currentInsertions()
     {
-    	$user = User::live(Session::get('city_id'));
+    	$user = User::live();
     	return $this->insertions()->with('users')->get()->filter(function($insertion) use ($user)
             {
                 $from = strtotime($insertion->howlong);

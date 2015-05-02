@@ -35,7 +35,7 @@ class InsertionsController extends BaseController {
 
         $city = City::find($city_id);
         if ($city) {
-            $user = User::live(Session::get('city_id'));
+            $user = User::live();
             $insertions = $city->currentInsertions();
 
             $result["success"] = true;
@@ -132,7 +132,7 @@ class InsertionsController extends BaseController {
     {
         $result["success"] = false;
 
-        $user = User::live(Session::has('city_id'));
+        $user = User::live();
         $insertions = Insertion::with('users')->get()->filter(function($insertion) use ($user)
         {
             if ($insertion->user_id == $user->id || $insertion->users()->where('user_id', $user->id)->first()) {
