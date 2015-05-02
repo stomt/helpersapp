@@ -23,11 +23,7 @@ function IsValidAmount(value){
 }
 
 function setHeader(city) {
-  if (cities && city) {
-    $('.city').html(cities[city]);
-  } else {
-    $('.city').html("Overview");
-  }
+  if (cities && city) $('.city').html(cities[city]);
 }
 function createCookie(name, value, days) {
   var expires;
@@ -345,6 +341,7 @@ $(document)
     $(document).on(tc, 'a[data-icon="home"]', function(e){
       stopBubble(e);
       $.mobile.pageContainer.pagecontainer('change', '#home');
+      $("#helpRequests").html('');
     });
   })
 .one("mobileinit", function () {
