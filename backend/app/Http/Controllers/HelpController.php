@@ -57,7 +57,7 @@ class HelpController extends BaseController {
     private function storeHelp($insertion, $amount)
     {
         $insertion->users()
-                  ->attach(User::live()->id, array('amount' => $amount));
+                  ->attach(User::live()->id, ['amount' => $amount]);
     }
 
     private function updateHelp($user, $amount) 
