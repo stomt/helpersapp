@@ -37,8 +37,7 @@
 </ul>
 </div><!-- /content -->
 
-<div data-role="footer" data-position="fixed">
-<a href="http://stomt.com" title="stomt - Feedback">stomt</a>  <small>v2.0.1</small>
+<div data-role="footer" data-position="fixed"><small>v2.0.1</small>
 <a href="#impressum" title="Impressum">Contact</a>
 </div>
 </div><!-- /page -->
