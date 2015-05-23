@@ -97,8 +97,8 @@ Dr.-Hans-Kapfinger-Straße 12, Raum 112/113<br>
 </div>
 
 <div data-role="footer" data-position="fixed">
-<a href="http://stomt.com" title="stomt - Feedback">By stomt</a>  v2.0.1
-<a href="#impressum" title="Impressum">Contact</a>
+    <a href="#impressum" title="Impressum">Contact</a>  v2.0.1
+    <a href="http://www.stomt.com/helpersapp" title="Helpersapp on stomt">Feedback</a>
 </div>
 </div>
 
