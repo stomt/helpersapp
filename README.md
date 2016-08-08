@@ -46,3 +46,10 @@ Other cities followed.
 
 A few weeks later Max Klenk converted the self-written backend into the PHP framework Laravel
 and improved the apps security, performance and also the frontend.
+
+
+## More about stomt
+
+* On the web [www.stomt.com](https://www.stomt.com)
+* [stomt for iOS](http://stomt.co/ios)
+* [stomt for Android](http://stomt.co/android)
