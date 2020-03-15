@@ -1,4 +1,4 @@
-<?php namespace App\Models;
+<?php namespace App;
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
@@ -49,5 +49,5 @@ class Admin extends Model implements UserInterface, RemindableInterface {
 	{
 		return $this->email;
 	}
-	
+
 }

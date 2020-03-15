@@ -2,10 +2,9 @@
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Request;
-use App\Models\City;
-use App\Models\User;
-use App\Models\Insertion;
-use Illuminate\Support\Facades\Validator;
+use App\City;
+use App\User;
+use App\Insertion;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 

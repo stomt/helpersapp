@@ -1,9 +1,6 @@
-<?php namespace App\Models;
-
-
+<?php namespace App;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use Illuminate\Support\Facades\Session;
+use App\User;
 
 class City extends Model {
 
@@ -13,7 +10,7 @@ class City extends Model {
 
     public function insertions()
     {
-    	return $this->hasMany('App\Models\Insertion');
+    	return $this->hasMany(Insertion::class);
     }
 
     public function currentInsertions()

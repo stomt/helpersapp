@@ -20,7 +20,7 @@
     <option>Please choose a district</option>
     <?php
     $regions = '';
-    $cities = App\Models\City::all();
+    $cities = App\City::all();
     foreach($cities as $city){
         $regions .= '<option value="'.$city->id.'"><a data-city="'.$city->id.'">'.$city->title.'</a></option>';
     }

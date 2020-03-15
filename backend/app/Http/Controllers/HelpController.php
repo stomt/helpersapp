@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\City;
-use App\Models\User;
-use App\Models\Insertion;
+use App\City;
+use App\User;
+use App\Insertion;
 
 class HelpController extends BaseController {
 

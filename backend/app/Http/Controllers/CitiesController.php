@@ -1,8 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
-use App\Models\City;
-use App\Models\User;
+use App\City;
+use App\User;
 use Illuminate\Support\Facades\Log;
 
 

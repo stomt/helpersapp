@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		Model::unguard();
 
 		$this->call('ProjectsSeeder');
 		$this->call('CategoriesSeeder');

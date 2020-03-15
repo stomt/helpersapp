@@ -2,7 +2,11 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-// Dotenv::load(__DIR__.'/../');
+(new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
+    dirname(__DIR__)
+))->bootstrap();
+
+date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +20,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 */
 
 $app = new Laravel\Lumen\Application(
-	realpath(__DIR__.'/../')
+    dirname(__DIR__)
 );
 
 $app->withFacades();
@@ -35,14 +39,35 @@ $app->withEloquent();
 */
 
 $app->singleton(
-    'Illuminate\Contracts\Debug\ExceptionHandler',
-    'App\Exceptions\Handler'
+    Illuminate\Contracts\Debug\ExceptionHandler::class,
+    App\Exceptions\Handler::class
 );
 
 $app->singleton(
-    'Illuminate\Contracts\Console\Kernel',
-    'App\Console\Kernel'
+    Illuminate\Contracts\Console\Kernel::class,
+    App\Console\Kernel::class
 );
+
+$app->singleton(Illuminate\Session\SessionManager::class, function () use ($app) {
+    return $app->loadComponent('session', Illuminate\Session\SessionServiceProvider::class, 'session');
+});
+
+$app->singleton('session.store', function () use ($app) {
+    return $app->loadComponent('session', Illuminate\Session\SessionServiceProvider::class, 'session.store');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Register Config Files
+|--------------------------------------------------------------------------
+|
+| Now we will register the "app" configuration file. If the file exists in
+| your configuration directory it will be loaded; otherwise, we'll load
+| the default version. You may register other files below as needed.
+|
+*/
+
+//$app->configure('app');
 
 /*
 |--------------------------------------------------------------------------
@@ -55,17 +80,18 @@ $app->singleton(
 |
 */
 
-$app->middleware([
- 'Illuminate\Cookie\Middleware\EncryptCookies',
- 'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
- 'Illuminate\Session\Middleware\StartSession',
- 'Illuminate\View\Middleware\ShareErrorsFromSession',
- //'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
+// $app->middleware([
+//     App\Http\Middleware\ExampleMiddleware::class
+// ]);
+
+
+$app->routeMiddleware([
+     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
 
-// $app->routeMiddleware([
-
-// ]);
+$app->middleware([
+    \Illuminate\Session\Middleware\StartSession::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -78,7 +104,9 @@ $app->middleware([
 |
 */
 
-// $app->register('App\Providers\AppServiceProvider');
+// $app->register(App\Providers\AppServiceProvider::class);
+// $app->register(App\Providers\AuthServiceProvider::class);
+// $app->register(App\Providers\EventServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +119,10 @@ $app->middleware([
 |
 */
 
-require __DIR__.'/../app/Http/routes.php';
+$app->router->group([
+
+], function ($router) {
+    require __DIR__.'/../routes/web.php';
+});
 
 return $app;

@@ -1,4 +1,4 @@
-<?php namespace App\Models;
+<?php namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -13,12 +13,12 @@ class Insertion extends Model {
 
     public function city()
     {
-    	return $this->belongsTo('App\Models\City');
+    	return $this->belongsTo('App\City');
     }
 
     public function users()
     {
-    	return $this->belongsToMany('App\Models\User')
+    	return $this->belongsToMany('App\User')
     				->withPivot('amount');
     }
 
@@ -28,12 +28,12 @@ class Insertion extends Model {
     }
 
     public function category(){
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo('App\Category');
     }
 
     public function creator()
     {
-    	return $this->hasOne('App\Models\User', 'user_id');
+    	return $this->hasOne('App\User', 'user_id');
     }
 
 }
