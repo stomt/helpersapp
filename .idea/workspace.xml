@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2d11fa51-af58-4b7e-9f48-a784996892f4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/helperapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/helperapp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/composer.lock" afterDir="false" />
-    </list>
+    <list default="true" id="2d11fa51-af58-4b7e-9f48-a784996892f4" name="Default" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -182,7 +176,7 @@
       <option name="presentableId" value="Default" />
       <updated>1430226313550</updated>
       <workItem from="1584259399453" duration="5415000" />
-      <workItem from="1586231813158" duration="188000" />
+      <workItem from="1586231813158" duration="205000" />
     </task>
     <servers />
   </component>
